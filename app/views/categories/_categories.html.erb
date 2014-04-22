@@ -1,0 +1,30 @@
+<h1>Categories</h1>
+<div id="categories_list">
+<% if can? :manage, Category %>
+  <p><%= link_to '< New >', new_category_path %></p>
+<% end %><br>
+  <table>
+    <thead>
+      <% if can? :manage, Category %>
+        <tr>
+          <th><font color="#74AFAD">Name</font></th>
+            <th>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#74AFAD">Actions</font></th>
+        </tr>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @categories.each do |c| %>
+        <tr>
+          <td><%= link_to c.name, c %></td>
+          <% if can? :manage, Category %>
+            <td>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_category_path(c) %> |
+              <%= link_to 'Delete', category_path(c), :method => 'delete', :confirm => 'Are you sure?' %></p>
+            </td>
+          <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+

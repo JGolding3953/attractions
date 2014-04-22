@@ -1,0 +1,8 @@
+<%= render 'attractions/attractions' %>
+
+<% if can? :manage, :all %>
+  <div id="users_categories_list">
+      <%= render 'users/users' %>
+      <%= render 'categories/categories' %>
+  </div>
+<% end %>

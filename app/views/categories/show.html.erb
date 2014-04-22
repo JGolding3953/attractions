@@ -1,0 +1,24 @@
+<br><p><%= link_to 'All Attractions', attractions_path %> | <%= link_to 'All Categories', categories_path%>
+<% if can? :manage, Category %>
+ | <%= link_to 'Edit', edit_category_path %></p>
+<% end %>
+
+<div id="grouplist">
+	<h1><%= @category.name %></h1>
+	<div id="grouplist_bg">
+		<ul class="current_listing clearfix">
+			<% @category_attractions.each do |a| %>				
+				<li>
+					<div id= "thumbnail_image">
+						<%= link_to(image_tag(a.imageurl, :alt => "Thumbnail Image", :style => "max-width:100%;height:auto;"), a) %>
+					</div>
+					<div class="list_text">
+						<h3><%= link_to a.name, a %></h3>
+						<h4 id="rating">Rating: <%= a.rating %></h4>
+						<h4><%= a.summary %></h4>
+					</div>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>

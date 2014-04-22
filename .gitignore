@@ -16,11 +16,30 @@
 /tmp
 
 # Ignore other unneeded files.
-database.yml
-doc/
 *.swp
 *~
 .project
 .DS_Store
 .idea
 .secret
+
+/vendor/bundle/
+/vendor/ruby/
+
+.sass-cache
+/config/config.yml
+/config/database.yml
+/config/secrets.yml
+
+/db/*.sql
+/doc
+
+/public/cache
+/public/stylesheets/compiled
+/public/system/*
+
+/cache
+
+/gems
+/specifications
+
