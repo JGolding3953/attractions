@@ -2,11 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
 	def index
-    if user_signed_in?
       @users = User.all
-    else
-      redirect_to new_user_session_path
-    end
   end
 
   def show
@@ -46,7 +42,7 @@ class UsersController < ApplicationController
     end
 
     if @user.update_attributes(user_params)
-      sign_in(@user, :bypass => true) if @user == current_user
+      sign_in(@user, :bypass => true)
       redirect_to @user, :flash => { :success => 'User was successfully updated.' }
     else
       render :action => 'edit'
