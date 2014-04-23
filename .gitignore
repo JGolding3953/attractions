@@ -30,6 +30,7 @@
 /config/config.yml
 /config/database.yml
 /config/secrets.yml
+/config/initializers/secret_token.rb
 
 /db/*.sql
 /doc
