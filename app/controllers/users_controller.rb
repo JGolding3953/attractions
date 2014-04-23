@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     end
 
     if @user.update_attributes(user_params)
-      sign_in(@user, :bypass => true)
+      sign_in(@user, :bypass => true) if @user == current_user
       redirect_to @user, :flash => { :success => 'User was successfully updated.' }
     else
       render :action => 'edit'
