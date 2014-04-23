@@ -43,13 +43,13 @@
 <% end %>
 
   <% if can? :manage, User %>
-	<br>
+<br />
     <div class="field">
       <%= f.label :roles %>
       <div class="controls">
         <% Role.all.each do |role| %>
           <%= radio_button_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
-          <%= role.name %><br />
+        <%= role.name %><br />
         <% end %>
       </div>
     </div>

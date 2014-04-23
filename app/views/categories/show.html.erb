@@ -1,4 +1,4 @@
-<br><p><%= link_to 'All Attractions', attractions_path %> | <%= link_to 'All Categories', categories_path%>
+<br /><p><%= link_to 'All Attractions', attractions_path %> | <%= link_to 'All Categories', categories_path%>
 <% if can? :manage, Category %>
  | <%= link_to 'Edit', edit_category_path %></p>
 <% end %>

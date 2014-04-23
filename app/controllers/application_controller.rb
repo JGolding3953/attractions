@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :authenticate_user!
+ # before_filter :authenticate_user!
   before_filter do
   		resource = controller_path.singularize.gsub('/', '_').to_sym
   		method = "#{resource}_params"

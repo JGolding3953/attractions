@@ -3,7 +3,7 @@
 <div id="a_list">
   <% if can? :manage, Attraction %>
     <p><%= link_to '< New >', new_attraction_path %></p>
-  <% end %><br>
+  <% end %><br />
   <table>
     <thead>
       <tr>
@@ -24,7 +24,7 @@
           
           <% if can? :manage, Attraction %>
             <td>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_attraction_path(a) %> | <%= link_to 'Delete', attraction_path(a), :method => 'delete', :confirm => 'Are you sure?' %></p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_attraction_path(a) %> | <%= link_to 'Delete', attraction_path(a), :method => 'delete', :class => 'action', :confirm => 'Are you sure?' %></p>
             </td>
           <% end %>
         </tr>

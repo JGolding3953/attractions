@@ -1,4 +1,4 @@
-<br><p><%= link_to 'All Attractions', attractions_path %>
+<br /><p><%= link_to 'All Attractions', attractions_path %>
 	| <%= link_to 'All '+@attraction.category.name, category_path(@attraction.category_id) %>
 	<% if can? :manage, Attraction %>
 		| <%= link_to 'Edit', edit_attraction_path(@attraction) %>
