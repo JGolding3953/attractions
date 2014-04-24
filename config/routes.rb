@@ -1,8 +1,7 @@
 Attractions::Application.routes.draw do
   
-  resources :reviews
-  resources :users
-  resources :attractions
+
+  
   resources :categories
   
   devise_for :users, :skip => [:registrations, :sessions]
@@ -12,8 +11,20 @@ Attractions::Application.routes.draw do
     post "/login" => "devise/sessions#create", :as => :user_session
     delete "/logout" => "devise/sessions#destroy", :as => :destroy_user_session
   end
-
+  
+  #match '/attractions/:id/reviews',   to: 'reviews#index',   via: 'get'
+  #match '/attractions/:id/reviews',   to: 'reviews#index',   via: 'get'
+  #match '/users/:id/reviews',   to: 'reviews#index',   via: 'get'
+  
   root :to => 'home#index'
+  
+    resources :users do
+    resources :reviews
+  end    
+  
+  resources :attractions do
+    resources :reviews
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

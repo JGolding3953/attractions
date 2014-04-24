@@ -17,3 +17,12 @@
 		User</p>
 	<% end %>
 <% end %>
+
+<div class="span2">
+  <% if @user.reviews.any? %>
+    <h3>Reviews (<%= @user.reviews.count %>)</h3>
+    <ol class="reviews">
+      <%= render @user_reviews %>
+    </ol>
+  <% end %>
+</div>
