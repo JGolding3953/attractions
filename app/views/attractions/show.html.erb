@@ -11,7 +11,7 @@
 			<%= image_tag(@attraction.imageurl, :alt => "Image", :style => "max-width:100%;height:auto;margin-top:0.5em;") %>
 		</div>
 		<div id="desc_text">								
-			<h4 id="rating"> Rating: <%= @attraction.rating %></h4>
+			<h4 id="rating"> Rating: <%= @attraction.average_rating %></h4>
 			<h3><%= @attraction.summary %></h3>
 			<p><%= @attraction.description %></p>
 			<div id="detailWeb">

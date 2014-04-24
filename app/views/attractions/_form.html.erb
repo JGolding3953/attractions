@@ -36,7 +36,7 @@
     <%= f.label :category %>
     <div class="controls">
       <% Category.all.each do |c| %>
-      <%= radio_button_tag "attraction[category_id]", c.id, @attraction.category_id == c.category_id %>
+      <%= radio_button_tag "attraction[category_id]", c.category_id, @attraction.category_id == c.category_id %>
         <%= c.name %><br />
       <% end %>
     </div>
@@ -64,9 +64,9 @@
   </div><br />
   
   <div class="field">
-    <%= f.label :rating %>
+    <%= f.label :average_rating %>
     <div class="controls">
-      <%= f.text_field :rating %>
+      <%= f.text_field :average_rating, readonly: true %>
     </div>
   </div><br />
 

@@ -3,7 +3,7 @@
 <% elsif can? :manage, User %>
 	<%= link_to 'All Users', users_path %>
 	| <%= link_to 'Edit User', edit_user_path(@user) %> |
-	<%= link_to 'Delete User', user_path(@user), :method => 'delete', :confirm => 'Are you sure?' %>
+	<%= link_to 'Delete User', user_path(@user), :method => 'delete', confirm: 'Are you sure?' %>
 <% end %></p><br />
 
 <h1>User</h1>

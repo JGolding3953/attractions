@@ -52,7 +52,7 @@ class AttractionsController < ApplicationController
     	params.require(:attraction)
     
 	    if can? :manage, Attraction
-	      params[:attraction].permit(:name, :summary, :description, :area, :rating, :website, :imageurl, :category_id)
+	      params[:attraction].permit(:name, :summary, :description, :area, :average_rating, :website, :imageurl, :category_id)
 	    end
   	end
 end

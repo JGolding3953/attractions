@@ -5,6 +5,6 @@ class Attraction < ActiveRecord::Base
 
   	# Default value for category id key, if blank.
   	def assign_default_category
-  		self.category_id ||= 1
+  		self.category_id ||= 4
   	end
 end

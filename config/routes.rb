@@ -1,5 +1,6 @@
 Attractions::Application.routes.draw do
   
+  resources :reviews
   resources :users
   resources :attractions
   resources :categories
