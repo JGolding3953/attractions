@@ -1,10 +1,11 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_filter :find_parent
 
   # GET /reviews
   # GET /reviews.json
   def index
-    @reviews = Review.all
+    @reviews = @parent.reviews.all
   end
 
   # GET /reviews/1
@@ -14,7 +15,13 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    @review = Review.new
+    if signed_in?
+      @review = Review.new(:attraction_id => params[:id])
+      session[:return_to] = nil 
+    else
+      session[:return_to] = request.url 
+      redirect_to login_path, alert: " 'You need to login to write a review' "
+    end
   end
 
   # GET /reviews/1/edit
@@ -24,11 +31,15 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(review_params)
+    @review = Review.create(review_params)
+    @user = User.find(current_user)
+    
+    params[:review][:user_id] == 12
+
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to [@parent, @review], notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
@@ -61,6 +72,19 @@ class ReviewsController < ApplicationController
     end
   end
 
+  # Reviews are nested for both attraction (as object of reviews) and user (as author of reviews) routes, 
+  # so need to establish which to use to populate @parent variable to use in all views.
+  
+  def find_parent
+    @parent = nil
+    
+    if params[:attraction_id]
+      @parent = Attraction.find(params[:attraction_id])
+    elsif params[:user_id]
+      @parent = User.find(params[:user_id])
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review

@@ -1,4 +1,4 @@
-<%= form_for(@review) do |f| %>
+<%= form_for [@parent, @review] do |f| %>
   <% if @review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -13,11 +13,7 @@
 
   <div class="field">
     <%= f.label :attraction_id %><br>
-    <%= f.number_field :attraction_id %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= f.number_field :attraction_id, read_only: true %>
   </div>
   <div class="field">
     <%= f.label :comments %><br>
