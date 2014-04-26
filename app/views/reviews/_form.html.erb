@@ -10,18 +10,13 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :attraction_id %><br>
-    <%= f.number_field :attraction_id, read_only: true %>
+    <%= f.label :rating %><br>
+    <%= f.text_field :rating %>
   </div>
   <div class="field">
     <%= f.label :comments %><br>
     <%= f.text_area :comments %>
-  </div>
-  <div class="field">
-    <%= f.label :rating %><br>
-    <%= f.text_field :rating %>
   </div>
   <div class="actions">
     <%= f.submit %>

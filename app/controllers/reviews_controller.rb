@@ -14,13 +14,13 @@ class ReviewsController < ApplicationController
   end
 
   # GET /reviews/new
-  def new
+  def new      
     if signed_in?
-      @review = Review.new(:attraction_id => params[:id])
+      @review = @parent.reviews.new
       session[:return_to] = nil 
     else
       session[:return_to] = request.url 
-      redirect_to login_path, alert: " 'You need to login to write a review' "
+      redirect_to new_user_session_path, alert: "You need to login to write a review"
     end
   end
 
@@ -32,10 +32,9 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = Review.create(review_params)
-    @user = User.find(current_user)
     
-    params[:review][:user_id] == 12
-
+    @review.user_id = current_user.id
+    @review.attraction_id = params[:attraction_id]
 
     respond_to do |format|
       if @review.save
@@ -53,7 +52,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        format.html { redirect_to [@parent, @review], notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit }
@@ -67,7 +66,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to reviews_url }
+      format.html { redirect_to @reviews }
       format.json { head :no_content }
     end
   end

@@ -3,4 +3,4 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', [@parent, @review] %> |
-<%= link_to 'Back', attraction_reviews_path %>
+<%= link_to 'Back', polymorphic_path([@parent, @review]) %>
