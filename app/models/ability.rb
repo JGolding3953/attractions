@@ -7,7 +7,7 @@ class Ability
     can :create, User
     can :read, Attraction
     can :read, Category
-    cannot :index, User
+    can :index, User
 
     if user.has_role? :admin
       can :manage, :all

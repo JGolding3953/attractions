@@ -1,11 +1,12 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_filter :find_parent
+  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_reviews, only: [:index]
+  before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   # GET /reviews
   # GET /reviews.json
   def index
-    @reviews = @parent.reviews.all
   end
 
   # GET /reviews/1
@@ -15,13 +16,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new      
-    if signed_in?
-      @review = @parent.reviews.new
-      session[:return_to] = nil 
-    else
-      session[:return_to] = request.url 
-      redirect_to new_user_session_path, alert: "You need to login to write a review"
-    end
+    @review = @parent.reviews.new
   end
 
   # GET /reviews/1/edit
@@ -66,8 +61,13 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to @reviews }
-      format.json { head :no_content }
+      if @reviews != nil
+        format.html { redirect_to @reviews, notice: 'Review deleted' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @parent, notice: 'Review deleted' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -88,6 +88,10 @@ class ReviewsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_review
       @review = Review.find(params[:id])
+    end
+  
+    def set_reviews
+      @reviews = @parent.reviews.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
