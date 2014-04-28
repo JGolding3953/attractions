@@ -1,13 +1,18 @@
 body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+  font: 100%/1.2em Myriad pro, Georgia, sans-serif;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	position: relative;
+	text-align: left;
+	max-width: 960px;
+	vertical-align: baseline;
+	background: #d9d9d9;
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: Myriad pro, Georgia, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }

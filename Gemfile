@@ -11,7 +11,7 @@ gem 'rolify', :git => "git://github.com/EppO/rolify.git"
 gem 'cancan'
 gem 'foundation-rails'
 gem 'better_errors'
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.2'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'

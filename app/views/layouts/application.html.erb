@@ -1,30 +1,35 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Attractions</title>
-  <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <p><%= link_to 'Home', root_path %> |
-  <% if user_signed_in? %>
-      <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete', data: { confirm: 'Are you sure?' } %> | 
-        Signed in as: <%= link_to current_user.email, user_path(current_user.id) %>
-  <% else %>
-      <%= link_to 'Log in', new_user_session_path %> |
-      <%= link_to 'Sign up', new_user_path %></p>
-  <% end %>
-  
-  <% [:notice, :error, :alert, :success].each do |level| %>
-    <% unless flash[level].blank? %>
-      <div class="<%= flash_class(level) %> fade in">
-        <%= content_tag :span, flash[level] %>
-      </div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Leeds Attractions" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <p><%= link_to 'Home', root_path %> |
+    <% if user_signed_in? %>
+        <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete', data: { confirm: 'Are you sure?' } %> | 
+          Signed in as: <%= link_to current_user.email, user_path(current_user.id) %>
+    <% else %>
+        <%= link_to 'Log in', new_user_session_path %> |
+        <%= link_to 'Sign up', new_user_path %></p>
     <% end %>
-  <% end %>
+    
+    <% [:notice, :error, :alert, :success].each do |level| %>
+      <% unless flash[level].blank? %>
+        <div class="<%= flash_class(level) %> fade in">
+          <%= content_tag :span, flash[level] %>
+        </div>
+      <% end %>
+    <% end %>
 
-<%= yield %>
-
-</body>
+    <%= yield %>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>
