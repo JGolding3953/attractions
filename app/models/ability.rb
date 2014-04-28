@@ -4,10 +4,11 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
     
+    can :index, User
     can :create, User
     can :read, Attraction
     can :read, Category
-    can :index, User
+    can :read, Review
 
     if user.has_role? :admin
       can :manage, :all
@@ -17,7 +18,7 @@ class Ability
       can [:read, :update], User do |account|
         account.email == user.email
       end
-      cannot [:create, :index], User
+      cannot :create, User
     end
   end
 end
