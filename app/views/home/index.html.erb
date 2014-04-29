@@ -1,8 +1,20 @@
-<%= render 'attractions/attractions' %>
-
-<% if can? :manage, :all %>
-  <div id="users_categories_list">
-      <%= render 'users/users' %>
-      <%= render 'categories/categories' %>
-  </div>
-<% end %>
+<div id="featured">
+  <ul class="index-orbit" data-orbit
+       data-options="animation:slide;
+                    pause_on_hover:true;
+                    resume_on_mouseout:true;
+                    animation_speed:500;
+                    timer_speed: 5000;
+                    navigation_arrows:true;
+                    slide_number: false;
+                    circular: true;">
+    <% @attractions.each do |a| %>
+    <li>
+      <%= link_to image_tag(a.imageurl, :alt => "slide "+a.id.to_s, :title => a.name), a %>
+      <div class="orbit-caption">
+        <%= link_to a.name, a %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+</div>

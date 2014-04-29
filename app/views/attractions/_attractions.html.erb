@@ -1,5 +1,4 @@
 <h1>Attractions</h1>
-
 <div id="a_list">
   <% if can? :manage, Attraction %>
     <p><%= link_to '< New >', new_attraction_path %></p>
@@ -7,11 +6,11 @@
   <table>
     <thead>
       <tr>
-        <th><font color="#74AFAD">Name</font></th>
-        <th><font color="#74AFAD">Summary</font></th>
-        <th><font color="#74AFAD">Category</font></th>
+        <th>Name</th>
+        <th>Summary</th>
+        <th>Category</th>
         <% if can? :manage, Attraction %>
-          <th>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#74AFAD">Actions</font></th>
+          <th>&nbsp;&nbsp;&nbsp;&nbsp;Actions</th>
         <% end %>
       </tr>
     </thead>

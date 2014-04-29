@@ -1,0 +1,86 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+
+html {
+	margin:0; /* resets */
+	padding:0;
+	height: 101%;
+}
+
+body {
+  max-width: 960px;
+  position: relative;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: baseline;
+}
+
+#wrapper {
+	max-width: 960px;
+	min-width: 300px;
+	overflow: hidden;
+}
+
+#content {
+  width: 100%;
+	overflow: hidden;
+}
+
+div {
+	display: block;
+}
+
+#main {
+  clear:both;
+}
+
+#flashSession {
+  width: 100%;
+  margin-top: 0.5%;
+}
+
+#flash {
+  float: left;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+
+}
+  
+#sessionInfo {
+  float: right;
+    p {
+      float: right;
+      margin-bottom: 5%;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #777777;
+}
+
+footer {
+  height: 45px;
+  background-color: #333;
+  ul li {
+    list-style: none;
+    display: inline;
+    padding: 15px;
+  }
+}

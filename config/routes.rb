@@ -2,7 +2,7 @@ Attractions::Application.routes.draw do
   
   devise_for :users, :skip => [:registrations]
     
-  resources :users, :only => [:show, :edit, :index, :destroy, :new] do
+  resources :users, :only => [:show, :edit, :index, :destroy, :new, :create] do
     resources :reviews
   end    
   
@@ -11,6 +11,8 @@ Attractions::Application.routes.draw do
   end
   
   resources :categories
+  
+  match '/admin',  to: 'admin#admin', via: 'get'
   
   root :to => 'home#index'
 

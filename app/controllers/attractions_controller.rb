@@ -8,6 +8,7 @@ class AttractionsController < ApplicationController
 	def show
 		@attraction = Attraction.find(params[:id])
     @attraction_reviews = @attraction.reviews.all
+    @attraction.set_average_rating
 	end
 
 	def destroy

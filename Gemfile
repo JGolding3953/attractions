@@ -16,7 +16,8 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-
+gem 'jquery-turbolinks'
+gem 'jquery-star-rating-rails', '~> 4.0.4'
 gem 'jbuilder'
 
 group :production do
