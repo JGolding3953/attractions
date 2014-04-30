@@ -1,50 +1,71 @@
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="row">
+  <div class="small-12 columns">
+    
+    <%= form_for @user do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h3><small><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</small></h3>
+          <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :email %>
-    <div class="controls">
-      <%= f.email_field :email %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <div class="controls">
-      <%= f.password_field :password %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <div class="controls">
-      <%= f.password_field :password_confirmation %>
-    </div>
-  </div>
-
-  <% if can? :manage, User %>
-    <div class="field">
-      <%= f.label :roles %>
-      <div class="controls">
-        <% Role.all.each do |role| %>
-          <%= radio_button_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
-          <%= role.name %><br />
-        <% end %>
+      
+      <div class="row">
+        <br /><div class="small-12 medium-4 small-centered columns">
+          <h2>Sign up</h2>
+        </div>
+      </div><br />
+        
+      <div class="row">
+        <div class="small-12 medium-4 small-centered columns">
+          <%= f.label :email %><br />
+          <input placeholder="enter your email" <%= f.email_field :email %>
+        </div>
+      </div><br />
+      
+      <div class="row">
+        <div class="small-12 medium-4 small-centered columns">
+          <%= f.label :password %><br />
+          <input placeholder="enter a password" <%= f.password_field :password %>
+        </div>
+      </div><br />
+      
+     <div class="row">
+        <div class="small-12 medium-4 small-centered columns">
+          <%= f.label :password_confirmation %><br />
+          <input placeholder="re-enter your password" <%= f.password_field :password_confirmation %>
+        </div>
       </div>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+      
+      <% if can? :manage, User %>
+        <div class="row">
+          <div class="small-12 medium-4 small-centered columns">
+            <%= f.label :role %><br />
+              <% Role.all.each do |role| %>
+                <%= radio_button_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
+                <%= role.name %>&nbsp;&nbsp;
+              <% end %>
+            </div>
+         </div>
+       <% end %>
+        
+      <br /><br /><div class="row">
+        <div class="small-12 medium-4 small-centered columns">
+          <div class="row">
+            <div class="small-12 medium-6 columns">
+              <%= f.submit 'Sign up', :class => 'long-button' %>
+            </div>
+            <div class="small-12 medium-6 columns">
+              <a href="<%= root_path %>" class="long-button-grey">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+    <% end %>
+        
   </div>
-<% end %>
+</div>

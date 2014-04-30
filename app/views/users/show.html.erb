@@ -6,7 +6,7 @@
 	<%= link_to 'Delete User', user_path(@user), :method => 'delete', confirm: 'Are you sure?' %>
 <% end %></p><br />
 
-<h1>User</h1>
+<h2>User</h2>
 
 <p><strong>Email:</strong> <%= @user.email %></p>
 <% if can? :manage, User %>

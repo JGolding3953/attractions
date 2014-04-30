@@ -1,24 +1,46 @@
-<%= form_for [@parent, @review] do |f| %>
-  <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
-
-      <ul>
-      <% @review.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="row">
+  <div class="small-12 columns">
+    
+    <%= form_for [@parent, @review] do |f| %>
+      <% if @review.errors.any? %>
+        <div id="error_explanation">
+          <h3><small><%= pluralize(@review.errors.count, "error") %> prohibited this user from being saved:</small></h3>
+          <ul>
+          <% @review.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :rating %><br>
-    <%= f.text_field :rating %>
+    
+      <div class="row">
+        <div class="small-12 medium-4 columns">
+          <%= f.label :rating %><br />
+          <input placeholder="give a rating" <%= f.text_field :rating %>
+        </div>
+      </div><br />
+      
+      <div class="row">
+        <div class="small-12 medium-4 columns">
+          <%= f.label :comments %><br />
+          <%= f.text_area :comments, :size => "30x10" %>
+        </div>
+      </div><br />
+    
+       <br /><br /><div class="row">
+        <div class="small-12 medium-4 columns">
+          <div class="row">
+            <div class="small-12 medium-6 columns">
+              <%= f.submit 'Submit', :class => 'long-button' %>
+            </div>
+            <div class="small-12 medium-6 columns">
+              <a href="<%= polymorphic_path([@parent]) %>" class="long-button-grey">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <% end %>
+        
   </div>
-  <div class="field">
-    <%= f.label :comments %><br>
-    <%= f.text_area :comments %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

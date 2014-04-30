@@ -1,24 +1,45 @@
-<%= form_for @category do |f| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
-
-      <ul>
-      <% @category.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="row">
+  <div class="small-12 columns">
+    
+    <%= form_for @category do |f| %>
+      <% if @category.errors.any? %>
+        <div id="error_explanation">
+          <h3><small><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</small></h3>
+          <ul>
+          <% @category.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <div class="controls">
-      <%= f.text_field :name %>
-    </div>
-  </div><br>
+    
+      <div class="row">
+        <br /><div class="small-10 medium-4 small-centered columns">
+          <h2>New category</h2>
+        </div>
+      </div><br />
+      
+      <div class="row">
+        <div class="small-10 medium-4 small-centered columns">
+          <%= f.label :name %><br />
+          <input placeholder="enter category name" <%= f.text_field :name %>
+        </div>
+      </div><br />
+    
+      <br /><br /><div class="row">
+        <div class="small-10 medium-4 small-centered columns">
+          <div class="row">
+            <div class="small-12 medium-6 columns">
+              <%= f.submit 'Create', :class => 'long-button' %>
+            </div>
+            <div class="small-12 medium-6 columns">
+              <a href="<%= admin_path %>" class="long-button-grey">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
   
-  <div class="actions">
-    <%= f.submit %>
+    <% end %>
+    
   </div>
-<% end %>
+</div>

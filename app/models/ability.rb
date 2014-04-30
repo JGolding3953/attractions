@@ -9,6 +9,7 @@ class Ability
     can :read, Attraction
     can :read, Category
     can :read, Review
+    cannot :index, Category
 
     if user.has_role? :admin
       can :manage, :all

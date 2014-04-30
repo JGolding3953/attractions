@@ -16,14 +16,17 @@
 
  */
 
+@import "foundation/components/buttons";
+
 html {
 	margin:0; /* resets */
 	padding:0;
-	height: 101%;
+	height: 100%;
 }
 
 body {
   max-width: 960px;
+  height: 100%;
   position: relative;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -36,19 +39,14 @@ body {
 	max-width: 960px;
 	min-width: 300px;
 	overflow: hidden;
-}
-
-#content {
-  width: 100%;
-	overflow: hidden;
+  min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -45px; /* the bottom margin is the negative value of the footer's height */
 }
 
 div {
 	display: block;
-}
-
-#main {
-  clear:both;
 }
 
 #flashSession {
@@ -60,27 +58,106 @@ div {
   float: left;
   margin-top: 0.5%;
   margin-bottom: 0.5%;
-
+  margin-left: 1.5%;
 }
   
 #sessionInfo {
   float: right;
+  margin-right: 2%;
     p {
       float: right;
       margin-bottom: 5%;
     }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p {
   color: #777777;
+}
+
+
+#featured {
+  clear:both;
+}
+
+.small-12, .medium-6 {
+  clear: none;
+  ul {
+    margin:0;
+    li {
+      list-style: none;
+      #image {
+        width: 50%;
+        float: left;
+        clear: both;
+        margin-bottom: 2%;
+      }
+      #text {
+        width: 45%;
+        float: right;
+        h3 {
+          line-height: 1;
+          a {
+            color: #777777;
+          }
+        }
+      }
+    }
+  }
 }
 
 footer {
   height: 45px;
   background-color: #333;
-  ul li {
-    list-style: none;
-    display: inline;
-    padding: 15px;
+  clear:both;
+  ul {
+    margin: 0;
+    padding-top: 1%;
+    li {
+      list-style: none;
+      display: inline;
+      padding-left: 2%;
+      a {
+        color: #fff;
+        font-size: 0.8em;
+      }
+      a:hover {
+        color: #fff;
+      }
+    }
   }
+}
+
+footer, .push {
+	height: 45px; /* .push must be the same height as .footer */
+}
+
+.long-button { 
+  @include button;
+  width: 100%;
+}
+
+.long-button-grey { 
+  @include button;
+  width: 100%;
+  background-color: #777;
+}
+
+.long-button-grey:hover {
+  background-color: #555;
+}
+
+#grouplist {
+  margin-bottom: 5%;
+}
+
+#searchbox {
+  border: 1px solid;
+  border-color: #F34008;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#otherbox {
+  border: 1px solid;
+  border-color: #2C79EE;
 }

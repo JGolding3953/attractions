@@ -14,108 +14,98 @@
 
   <body>
     <div id= "wrapper">
-      <div id= "content">
-        <header>
-          <nav class="top-bar" data-topbar>
-            <ul class="title-area">
-              <li class="name">
-                <h1><%= link_to "Leeds Attractions", root_path %></h1>
+      <header>
+        <nav class="top-bar" data-topbar>
+          <ul class="title-area">
+            <li class="name">
+              <h1><%= link_to "Leeds Attractions", root_path %></h1>
+            </li>
+             <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+          </ul>          
+          <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+              <% if user_signed_in? %>
+                <li class="has-form">
+                  <a href="<%= user_path(current_user.id) %>" class="button">My Account</a>
+                </li>
+              <% else %>
+              <li><%= link_to 'Sign in', new_user_session_path %></li>
+              <li class="divider"></li>
+              <li class="has-form">
+                <a href="<%= new_user_path %>" class="button">Sign Up</a>
               </li>
-               <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-              <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-            </ul>          
-            <section class="top-bar-section">
-              <!-- Right Nav Section -->
-              <ul class="right">
-                <% if user_signed_in? %>
-                  <li class="has-form">
-                    <a href="<%= user_path(current_user.id) %>" class="button">My Account</a>
-                  </li>
-                <% else %>
-                <li><%= link_to 'Sign in', new_user_session_path %></li>
-                <li class="divider"></li>
-                <li class="has-form">
-                  <a href="<%= new_user_path %>" class="button">Sign Up</a>
-                </li>
-                <% end %>
-                <li class="divider"></li>
-                <li class="has-dropdown">
-                  <a href="#">Attractions</a>
-                  <ul class="dropdown">
-                    <% @categories.each do |c| %>
-                      <li><%= link_to c.name, c %></li>
-                    <% end %>
-                  </ul>
-                </li>
-                <li class="divider"></li>
-                <li class="has-form">
-                  <div class="row collapse">
-                    <div class="large-8 small-9 columns">
-                      <input type="text" placeholder="search">
-                    </div>
-                    <div class="large-4 small-3 columns">
-                      <a href="#" class="alert button expand">Search</a>
-                    </div>
+              <% end %>
+              <li class="divider"></li>
+              <li class="has-dropdown">
+                <a href="#">Attractions</a>
+                <ul class="dropdown">
+                  <% @categories.each do |c| %>
+                    <li><%= link_to c.name, c %></li>
+                  <% end %>
+                </ul>
+              </li>
+              <li class="divider"></li>
+              <li class="has-form">
+                <div class="row collapse">
+                  <div class="large-8 small-9 columns">
+                    <input type="text" placeholder="search">
                   </div>
-                </li>
-              </ul>
-          
-              <!-- Left Nav Section -->
-              <ul class="left">
-                <% if can? :manage, :all %>
-                <li class="divider"></li>
-                <li><%= link_to "Site Admin", admin_path %></li>
-                <li class="divider"></li>
-                <% end %>
-              </ul>
-            </section>
-          </nav>
-        </header>
-        
-        <div id="flashSession">
-          <div id="flash">
-            <% [:notice, :error, :alert, :success].each do |level| %>
-              <% unless flash[level].blank? %>
-                <div id="flash">
-                  <div class="<%= flash_class(level) %> fade in">
-                    <%= content_tag :span, flash[level] %>
+                  <div class="large-4 small-3 columns">
+                    <a href="#" class="alert button expand">Search</a>
                   </div>
                 </div>
+              </li>
+            </ul>
+        
+            <!-- Left Nav Section -->
+            <ul class="left">
+              <% if can? :manage, :all %>
+              <li class="divider"></li>
+              <li><%= link_to "Site Admin", admin_path %></li>
+              <li class="divider"></li>
               <% end %>
-            <% end %>
-          </div>
-            <% if user_signed_in? %>
-              <div id="sessionInfo">
-                <p>
-                  Signed in as: <%= link_to current_user.email, user_path(current_user.id) %> |
-                  <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete', data: { confirm: "Are you sure?" } %>
-                </p>
+            </ul>
+          </section>
+        </nav>
+      </header>
+      
+      <div id="flashSession">
+        <% [:notice, :error, :alert, :success].each do |level| %>
+          <% unless flash[level].blank? %>
+            <div id="flash">
+              <div class="<%= flash_class(level) %> fade in">
+                <%= content_tag :span, flash[level] %>
               </div>
-            <% end %>
+            </div>
+          <% end %>
+        <% end %>
+        <% if user_signed_in? %>
+          <div id="sessionInfo">
+            <p>
+              Signed in as: <%= link_to current_user.email, user_path(current_user.id) %> |
+              <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete', data: { confirm: "Are you sure?" } %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="row">
+        <div class="small-12 columns">     
+          <%= yield %> 
         </div>
-        
-        <div id="main">
-        </div> <!-- main -->
-        
-        <div id="sidebar">
-        </div> <!-- sidebar -->
-    
-        <%= yield %>    
-
-        <footer>
-          <nav class="top-bar" data-topbar>
-					  <ul>
-              <li><%= link_to "Contact" %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Terms & conditions" %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Privacy policy" %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Cookie policy" %></li>
-					  </ul>
-          </nav>
-				</footer>
-      </div> <!-- content -->
+      </div>
+  
+      <div class="push"></div>
     </div> <!-- wrapper -->
+    <footer>
+      <ul>
+        <li><%= link_to "Contact" %></li>
+        <li><%= link_to "Terms & conditions" %></li>
+        <li><%= link_to "Privacy policy" %></li>
+        <li><%= link_to "Cookie policy" %></li>
+      </ul>
+    </footer>
   </body>
 </html>

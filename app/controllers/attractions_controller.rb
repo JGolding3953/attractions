@@ -1,6 +1,7 @@
 class AttractionsController < ApplicationController
   load_and_authorize_resource
-
+  include ListsHelper
+  
 	def index
 		@attractions = Attraction.all
 	end
@@ -9,6 +10,10 @@ class AttractionsController < ApplicationController
 		@attraction = Attraction.find(params[:id])
     @attraction_reviews = @attraction.reviews.all
     @attraction.set_average_rating
+    
+    @category = Category.find(@attraction.category.id)
+    @category_attractions = @category.attractions.all
+    @category_attractions_limit = set_ca_limit(@category_attractions)
 	end
 
 	def destroy
@@ -27,8 +32,6 @@ class AttractionsController < ApplicationController
 
   def create
     @attraction = Attraction.create(attraction_params)
-
-    #params[:attraction][:category_id] ||= '1'
 
     if @attraction.save
       redirect_to attractions_path, :flash => { :success => 'Attraction created.' }
@@ -49,12 +52,12 @@ class AttractionsController < ApplicationController
   end
 
   private
-  def attraction_params
-
-    params.require(:attraction)
   
+  def attraction_params
+    params.require(:attraction)
     if can? :manage, Attraction
       params[:attraction].permit(:name, :summary, :description, :area, :average_rating, :website, :imageurl, :category_id)
     end
   end
+  
 end

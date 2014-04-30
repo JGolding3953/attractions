@@ -1,4 +1,4 @@
-<div id="featured">
+<div id="featured" class="small-12 medium-8 columns" > <!-- main -->
   <ul class="index-orbit" data-orbit
        data-options="animation:slide;
                     pause_on_hover:true;
@@ -8,13 +8,50 @@
                     navigation_arrows:true;
                     slide_number: false;
                     circular: true;">
-    <% @attractions.each do |a| %>
+    <% @featured.each do |f| %>
     <li>
-      <%= link_to image_tag(a.imageurl, :alt => "slide "+a.id.to_s, :title => a.name), a %>
+      <%= link_to image_tag(f.imageurl, :alt => "slide "+f.id.to_s, :title => f.name), f %>
       <div class="orbit-caption">
-        <%= link_to a.name, a %>
+        <%= link_to f.name, f %>
       </div>
     </li>
     <% end %>
   </ul>
-</div>
+  <div id="listings" class="row"> <!-- listings -->
+    <div id="whatson" class="small-12 medium-6 columns"> <!-- random -->
+      <h3>What's on</h3>
+      <ul>
+      <% @random_list.each do |r| %>
+        <li>
+          <div id="image">
+            <%= link_to image_tag(r.imageurl, :alt => "image "+r.id.to_s, :title => r.name), r %>
+          </div>
+          <div id="text">
+            <h3><small><%= link_to r.name, r %></small></h3>
+          </div>
+        </li>
+      <% end %>
+      </ul>
+    </div> <!-- random -->
+    <div id="popular" class="small-12 medium-6 columns show-for-medium-up"> <!-- popular -->
+      <h3>Popular</h3>
+      <ul>
+      <% @popular_list.each do |p| %>
+        <li>
+          <div id="image">
+            <%= link_to image_tag(p.imageurl, :alt => "image "+p.id.to_s, :title => p.name), p %>
+          </div>
+          <div id="text">
+            <h3><small><%= link_to p.name, p %></small></h3>
+          </div>
+        </li>
+      <% end %>
+      </ul>
+    </div> <!-- popular -->  
+  </div><br /> <!-- listings -->
+</div> <!-- main -->
+          
+<div class="small-12 medium-4 columns show-for-medium-up"> <!-- sidebar -->
+  <%= render 'layouts/search' %>
+</div><br /> <!-- sidebar -->
+

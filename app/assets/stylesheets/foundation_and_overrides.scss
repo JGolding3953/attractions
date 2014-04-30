@@ -234,44 +234,44 @@ $microformat-summary-font-weight: bold;
 
 // Alert Boxes
 
-// $include-html-alert-classes: $include-html-classes;
+$include-html-alert-classes: $include-html-classes;
 
 // We use this to control alert padding.
-// $alert-padding-top: rem-calc(14);
-// $alert-padding-default-float: $alert-padding-top;
-// $alert-padding-opposite-direction: $alert-padding-top + rem-calc(10);
-// $alert-padding-bottom: $alert-padding-top;
+$alert-padding-top: rem-calc(14);
+$alert-padding-default-float: $alert-padding-top;
+$alert-padding-opposite-direction: $alert-padding-top + rem-calc(10);
+$alert-padding-bottom: $alert-padding-top;
 
 // We use these to control text style.
-// $alert-font-weight: normal;
-// $alert-font-size: rem-calc(13);
-// $alert-font-color: #fff;
-// $alert-font-color-alt: scale-color($secondary-color, $lightness: -66%);
+$alert-font-weight: normal;
+$alert-font-size: rem-calc(13);
+$alert-font-color: #fff;
+$alert-font-color-alt: scale-color($secondary-color, $lightness: -66%);
 
 // We use this for close hover effect.
-// $alert-function-factor: -14%;
+$alert-function-factor: -14%;
 
 // We use these to control border styles.
-// $alert-border-style: solid;
-// $alert-border-width: 1px;
-// $alert-border-color: scale-color($primary-color, $lightness: $alert-function-factor);
-// $alert-bottom-margin: rem-calc(20);
+$alert-border-style: solid;
+$alert-border-width: 1px;
+$alert-border-color: scale-color($primary-color, $lightness: $alert-function-factor);
+$alert-bottom-margin: rem-calc(20);
 
 // We use these to style the close buttons
-// $alert-close-color: #333;
-// $alert-close-top: 50%;
-// $alert-close-position: rem-calc(4);
-// $alert-close-font-size: rem-calc(22);
-// $alert-close-opacity: 0.3;
-// $alert-close-opacity-hover: 0.5;
-// $alert-close-padding: 9px 6px 4px;
+$alert-close-color: #333;
+$alert-close-top: 50%;
+$alert-close-position: rem-calc(4);
+$alert-close-font-size: rem-calc(22);
+$alert-close-opacity: 0.3;
+$alert-close-opacity-hover: 0.5;
+$alert-close-padding: 9px 6px 4px;
 
 // We use this to control border radius
-// $alert-radius: $global-radius;
+$alert-radius: $global-radius;
 
 // We use this to control transition effects
-// $alert-transition-speed: 300ms;
-// $alert-transition-ease: ease-out;
+$alert-transition-speed: 300ms;
+$alert-transition-ease: ease-out;
 
 // Block Grid
 
@@ -362,11 +362,11 @@ $button-disabled-opacity: 0.7;
 
 // Button Groups
 
-// $include-html-button-classes: $include-html-classes;
+$include-html-button-classes: $include-html-classes;
 
 // Sets the margin for the right side by default, and the left margin if right-to-left direction is used
-// $button-bar-margin-opposite: rem-calc(10);
-// $button-group-border-width: 1px;
+$button-bar-margin-opposite: rem-calc(10);
+$button-group-border-width: 1px;
 
 // Clearing
 
@@ -1070,7 +1070,7 @@ $preloader-class: "preloader";
 
 // Tables
 
-// $include-html-table-classes: $include-html-classes;
+$include-html-table-classes: $include-html-classes;
 
 // These control the background color for the table and even rows
 $table-bg: #fff;
@@ -1240,9 +1240,9 @@ $topbar-divider-border-top: solid 1px scale-color($topbar-bg-color, $lightness: 
 // VISIBILITY CLASSES
 //
 
-// $include-html-visibility-classes: $include-html-classes;
-// $include-table-visibility-classes: true;
-// $include-legacy-visibility-classes: true;
+$include-html-visibility-classes: $include-html-classes;
+$include-table-visibility-classes: true;
+$include-legacy-visibility-classes: true;
 
 //
 // RANGE SLIDER

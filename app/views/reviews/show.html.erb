@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to '< Back', polymorphic_path([@parent, @reviews]) %>
+
 <p>
   <strong>Attraction:</strong>
   <%= @review.attraction_id %>
@@ -20,5 +22,4 @@
   <%= @review.rating %>
 </p>
 
-<%= link_to 'Edit', edit_polymorphic_path([@parent, @review]) %>
-<%= link_to 'Back', polymorphic_path([@parent, @reviews]) %>
+<a href="<%= edit_polymorphic_path([@parent, @review]) %>" class="button [small]">edit</a><br />

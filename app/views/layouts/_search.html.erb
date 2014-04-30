@@ -1,0 +1,38 @@
+<div id="searchbox">
+  <h3>Search</h3>
+  
+    <div class="row">
+      <div class="small-12 columns">
+        <label>By category
+          <select id="select">
+            <Option value="">Select
+            <% Category.all.each do |c| %>
+              <option value="<%= c.id %>">- <%= c.name %></option>
+            <% end %>
+            <script>
+              //get select element and listen for a change event on it.
+              //take the value of the selected option and construct the relevant category page url.
+              $('#select').change(function() {
+                location.href = "<%= root_path %>" + "categories/" + $(this).val();
+              });
+            </script>
+          </select>
+        </label>
+      </div>
+    </div><br /> <!-- row -->
+  
+    <div class="row">
+      <div class="small-12 columns">
+        <label>By keyword
+          <input type="text" placeholder="search"/> 
+        </label><br />
+       </div>
+    </div> <!-- row -->
+  
+    <div class="row">
+      <div class="small-12 medium-4 columns">
+        <a href="#" class="alert button small">Search</a>
+      </div>  
+    </div> <!-- row -->
+  
+</div><br />

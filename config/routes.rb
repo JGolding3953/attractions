@@ -2,7 +2,7 @@ Attractions::Application.routes.draw do
   
   devise_for :users, :skip => [:registrations]
     
-  resources :users, :only => [:show, :edit, :index, :destroy, :new, :create] do
+  resources :users, :only => [:show, :edit, :update, :index, :destroy, :new, :create] do
     resources :reviews
   end    
   
