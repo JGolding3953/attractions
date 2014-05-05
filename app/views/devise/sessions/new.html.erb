@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="small-12 columns">
+    
+    <div class="row">
+      <div class="small-12 medium-4 small-centered columns">
+        <h2>Sign in</h2>
+      </div>
+    </div><br />
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row">
+      <div class="small-12 medium-4 small-centered columns">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+    </div>
+        
+    <div class="row">
+      <div class="small-12 medium-4 small-centered columns">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="small-12 medium-4 small-centered columns">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div><br />
+    
+    <% if devise_mapping.rememberable? -%>
+    <div class="row">
+      <div class="small-12 medium-4 small-centered columns">  
+        <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+      </div>
+    </div>
+    <% end -%>
+        
+    <div class="row">
+      <div class="small-12 medium-4 small-centered columns">
+        <div class="row">
+          <div class="small-12 medium-6 columns">
+            <%= f.submit 'Sign in', :class => 'long-button' %>
+          </div>
+          <div class="small-12 medium-6 columns">
+            <a href="<%= root_path %>" class="long-button-grey">Cancel</a>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+    <% end %>
+    
+    <div class="row">
+      <div class="small-12 medium-4 small-centered columns">
+        
+        <div class="row collapse">
+          <div id="signin_divide" class="small-5 columns">
+          </div>
+          <div id="or" class="small-2 columns">
+            <h4>or</h4>
+          </div>
+          <div id="signin_divide" class="small-5 columns">
+          </div>
+        </div><br />
+        
+        <div class="row">
+          <div class="small-12 columns">
+            <a href="<%= new_user_path %>" class="long-button">Sign up</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+
+  </div>
+</div>

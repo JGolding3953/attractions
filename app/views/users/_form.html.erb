@@ -22,21 +22,21 @@
       <div class="row">
         <div class="small-12 medium-4 small-centered columns">
           <%= f.label :email %><br />
-          <input placeholder="enter your email" <%= f.email_field :email %>
+          <input placeholder="enter your email" <%= f.email_field :email, autocomplete: "off" %>
         </div>
       </div><br />
       
       <div class="row">
         <div class="small-12 medium-4 small-centered columns">
           <%= f.label :password %><br />
-          <input placeholder="enter a password" <%= f.password_field :password %>
+          <input placeholder="enter a password" <%= f.password_field :password, autocomplete: "off" %>
         </div>
       </div><br />
       
      <div class="row">
         <div class="small-12 medium-4 small-centered columns">
           <%= f.label :password_confirmation %><br />
-          <input placeholder="re-enter your password" <%= f.password_field :password_confirmation %>
+          <input placeholder="re-enter your password" <%= f.password_field :password_confirmation, autocomplete: "off" %>
         </div>
       </div>
       
