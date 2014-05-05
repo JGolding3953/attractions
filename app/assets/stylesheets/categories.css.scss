@@ -2,9 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-ul {
-  margin-left: 0;
-  li {
-	  list-style: none;
+#c_list {
+  border: 1px solid;
+  border-color: #2C79EE;
+  margin-bottom: 5%;
+  ul {
+    margin-left: 0;
+    li {
+      margin-bottom: 5%;
+      list-style: none;
+      clear: both;
+      h4, h5, h6 {
+        line-height: 1;
+      }
+    }
   }
+}
+
+#c_a_image {
+  margin-left: -3%;
+  margin-bottom: 5%;
+}
+
+#list_rating a {
+  color: #c2c2c2;
+}
+
+#list_summary a {
+  color: #777;
 }

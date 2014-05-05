@@ -12,22 +12,16 @@
           </ul>
         </div>
       <% end %>
-    
-      <div class="row">
-        <br /><div class="small-10 medium-4 small-centered columns">
-          <h2>New category</h2>
-        </div>
-      </div><br />
       
       <div class="row">
-        <div class="small-10 medium-4 small-centered columns">
+        <div class="small-12 medium-4 small-centered columns">
           <%= f.label :name %><br />
           <input placeholder="enter category name" <%= f.text_field :name %>
         </div>
       </div><br />
     
       <br /><br /><div class="row">
-        <div class="small-10 medium-4 small-centered columns">
+        <div class="small-12 medium-4 small-centered columns">
           <div class="row">
             <div class="small-12 medium-6 columns">
               <%= f.submit 'Create', :class => 'long-button' %>

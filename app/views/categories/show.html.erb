@@ -3,22 +3,35 @@
  | <%= link_to 'Edit', edit_category_path %></p>
 <% end %>
 
-<div id="grouplist">
-	<h2><%= @category.name %></h2>
-	<div id="grouplist_bg">
-		<ul class="current_listing clearfix">
-			<% @category_attractions.each do |a| %>				
-				<li>
-					<div id= "thumbnail_image">
-						<%= link_to(image_tag(a.imageurl, :alt => "Thumbnail Image", :style => "max-width:100%;height:auto;"), a) %>
-					</div>
-					<div class="list_text">
-						<h3><%= link_to a.name, a %></h3>
-						<h4 id="rating">Rating: <%= a.average_rating %></h4>
-						<h4><%= a.summary %></h4>
-					</div>
-				</li>
-			<% end %>
-		</ul>
-	</div>
-</div>
+<div class="row">
+  
+  <div class="small-12 large-3 columns show-for-large-up">
+    <%= render 'layouts/search' %>
+  </div>
+
+  <div id="c_list" class="small-12 medium-9 large-6 columns">
+    <h3><%= @category.name %></h3>
+    <ul>
+    <% @category_attractions.each do |a| %>
+      <li>
+        <div id="c_a_image"  class="small-12 medium-6 columns">
+          <a class="th"<%= link_to(image_tag(a.imageurl, :alt => "Thumbnail Image", :style => "max-width:100%;height:auto;"), a) %></a>
+        </div>
+        <div id="c_a_text" class="small-12 medium-6 columns">
+          <h5><%= link_to a.name, a %></h5>
+          <% if a.average_rating != nil %>
+          <h4><small id="list_rating"><%= link_to 'Rating: '+a.average_rating.to_s, new_attraction_review_path(a.id) %></small></h4>
+          <% else %>
+          <h4><small id="list_rating"><%= link_to 'Not yet rated', new_attraction_review_path(a.id) %></small></h4>
+          <% end %>
+          <h4><small id="list_summary"><%= link_to a.summary[0..50]+"...", a %></small></h4>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+  
+  <div id="" class="small-12 large-3 columns">
+  </div><br />
+
+</div> <!-- row -->

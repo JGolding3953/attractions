@@ -1,0 +1,25 @@
+<div id="otherbox">
+ <h3>Other 
+   <% if @attraction %>
+     <%= @attraction.category.name %>
+   <% elsif @parent %>
+     <%= @parent.category.name %></h3>
+   <% end %>
+  
+ <br /><br /><div class="row">
+   <div class="small-12 columns">
+     <ul>
+      <% @category_attractions_limit.each do |c_a| %>
+        <li>
+          <div id="other_image">
+            <a class="th"<%= link_to image_tag(c_a.imageurl, :alt => "image "+c_a.id.to_s, :title => c_a.name), c_a %></a>
+          </div>
+          <div id="other_text">
+            <h3><small><%= link_to c_a.name, c_a %></small></h3>
+          </div>
+        </li>
+      <% end %>
+      </ul>
+   </div>
+  </div>
+</div><br />

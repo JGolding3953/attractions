@@ -79,7 +79,7 @@ h1, h2, h3, h4, h5, h6, p {
   clear:both;
 }
 
-.small-12, .medium-6 {
+#whatson, #popular, #otherbox {
   clear: none;
   ul {
     margin:0;
@@ -94,6 +94,17 @@ h1, h2, h3, h4, h5, h6, p {
       #text {
         width: 45%;
         float: right;
+      }
+      #other_image  {
+        width: 100%
+      }
+      #other_text {
+        clear: both;
+        float: left;
+        width: 100%;
+        margin-bottom: 5%;
+      }
+      #text, #other_text {
         h3 {
           line-height: 1;
           a {
@@ -103,6 +114,13 @@ h1, h2, h3, h4, h5, h6, p {
       }
     }
   }
+}
+
+#otherbox {
+  border: 1px solid;
+  border-color: #2C79EE;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 footer {
@@ -132,13 +150,11 @@ footer, .push {
 }
 
 .long-button { 
-  @include button;
-  width: 100%;
+  @include button($full-width: true);
 }
 
 .long-button-grey { 
-  @include button;
-  width: 100%;
+  @include button($full-width: true);
   background-color: #777;
 }
 
@@ -155,9 +171,4 @@ footer, .push {
   border-color: #F34008;
   padding-left: 5%;
   padding-right: 5%;
-}
-
-#otherbox {
-  border: 1px solid;
-  border-color: #2C79EE;
 }

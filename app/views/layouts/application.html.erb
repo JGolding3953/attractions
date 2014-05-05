@@ -84,12 +84,19 @@
         <% if user_signed_in? %>
           <div id="sessionInfo">
             <p>
-              Signed in as: <%= link_to current_user.email, user_path(current_user.id) %> |
-              <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete', data: { confirm: "Are you sure?" } %>
+              Signed in as: <%= link_to current_user.email, user_path(current_user.id) %>
+              <% if can? :manage, :all %>
+                (admin)
+              <% end %>
+              | <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete', data: { confirm: "Are you sure?" } %>
             </p>
           </div>
         <% end %>
       </div>
+      
+      <% if user_signed_in? == false %>
+        <br /><br />
+      <% end %>
       
       <div class="row">
         <div class="small-12 columns">     

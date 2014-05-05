@@ -1,4 +1,6 @@
-class ReviewsController < ApplicationController
+class ReviewsController < ApplicationController  
+  include ListsHelper
+
   before_filter :find_parent
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_reviews, only: [:index]
@@ -15,12 +17,30 @@ class ReviewsController < ApplicationController
   end
 
   # GET /reviews/new
-  def new      
-    @review = @parent.reviews.new
+  def new
+    if params[:user_id]
+       respond_to do |format|
+          format.html { redirect_to user_reviews_path, notice: 'You are not authorised to do this.' }
+          format.json { head :no_content }
+       end
+    else    
+      @review = @parent.reviews.new
+    end
   end
 
   # GET /reviews/1/edit
   def edit
+    if (current_user.id != @review.user_id) && (cannot? :manage, :all)
+      respond_to do |format|
+        if params[:attraction_id]
+          format.html { redirect_to attraction_reviews_path, notice: 'You are not authorised to do this.' }
+          format.json { head :no_content }
+        elsif params[:user_id]
+          format.html { redirect_to user_reviews_path, notice: 'You are not authorised to do this.' }
+          format.json { head :no_content }
+        end
+      end
+    end
   end
 
   # POST /reviews
@@ -59,6 +79,18 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
+    if (current_user.id != @review.user_id) && (cannot? :manage, :all)
+     respond_to do |format|
+        if params[:attraction_id]
+          format.html { redirect_to attraction_reviews_path, notice: 'You are not authorised to do this.' }
+          format.json { head :no_content }
+        elsif params[:user_id]
+          format.html { redirect_to user_reviews_path, notice: 'You are not authorised to do this.' }
+          format.json { head :no_content }
+        end
+      end
+    end
+    
     @review.destroy
     respond_to do |format|
       if @reviews != nil
@@ -79,6 +111,7 @@ class ReviewsController < ApplicationController
     
     if params[:attraction_id]
       @parent = Attraction.find(params[:attraction_id])
+      set_ca_limit(@parent.category.id, @parent.id)
     elsif params[:user_id]
       @parent = User.find(params[:user_id])
     end
@@ -88,14 +121,15 @@ class ReviewsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_review
       @review = Review.find(params[:id])
+      set_ca_limit(@review.attraction.category.id, @review.attraction.id)
     end
   
     def set_reviews
       @reviews = @parent.reviews.all
     end
-
+  
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:attraction_id, :user_id, :comments, :rating)
+      params.require(:review).permit(:attraction_id, :user_id, :title, :comments, :rating)
     end
 end

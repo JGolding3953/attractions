@@ -1,8 +1,7 @@
 <div id="featured" class="small-12 medium-8 columns" > <!-- main -->
   <ul class="index-orbit" data-orbit
        data-options="animation:slide;
-                    pause_on_hover:true;
-                    resume_on_mouseout:true;
+                    pause_on_hover:false;
                     animation_speed:500;
                     timer_speed: 5000;
                     navigation_arrows:true;
@@ -24,7 +23,7 @@
       <% @random_list.each do |r| %>
         <li>
           <div id="image">
-            <%= link_to image_tag(r.imageurl, :alt => "image "+r.id.to_s, :title => r.name), r %>
+            <a class="th"<%= link_to image_tag(r.imageurl, :alt => "image "+r.id.to_s, :title => r.name), r %></a>
           </div>
           <div id="text">
             <h3><small><%= link_to r.name, r %></small></h3>
@@ -39,7 +38,7 @@
       <% @popular_list.each do |p| %>
         <li>
           <div id="image">
-            <%= link_to image_tag(p.imageurl, :alt => "image "+p.id.to_s, :title => p.name), p %>
+            <a class="th"<%= link_to image_tag(p.imageurl, :alt => "image "+p.id.to_s, :title => p.name), p %></a>
           </div>
           <div id="text">
             <h3><small><%= link_to p.name, p %></small></h3>

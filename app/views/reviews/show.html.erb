@@ -1,25 +1,67 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="small-12">
+    
+    <div class="small-12 medium-8 columns">
+        
+      <h3>Review for <%= link_to @review.attraction.name, @review.attraction %></h3>       
+        <h4><small>By <%= link_to @review.user.email, user_path(@review.user_id) %>
+          <% if user_signed_in? %>
+            <% if @review.user.id == current_user.id %>
+              (You)
+            <% end %>
+          <% end %>
+          | <%= link_to 'See all '+@review.user.email+"'s"+' reviews', user_reviews_path(@review.user.id) %>
+          </small></h4><br />
 
-<%= link_to '< Back', polymorphic_path([@parent, @reviews]) %>
+          <h4><small><strong>Rating: <%= @review.rating %>/5
+            <% if @review.title != nil %>
+              <%= @review.title %>,
+            <% end %>
+            </strong><%= @review.created_at.strftime("%d %b %Y") %></small></h4>
 
-<p>
-  <strong>Attraction:</strong>
-  <%= @review.attraction_id %>
-</p>
+          <p><%= @review.comments %></p>           
 
-<p>
-  <strong>User:</strong>
-  <%= @review.user_id %>
-</p>
+          <div class="row">
+            <% if user_signed_in? %>
+            <% if (@review.user.id == current_user.id) || (can? :manage, Review) %>
+              <div class="small-12 medium-4 columns">
+                <div id="review_list_controls" class="small-12 medium-6 columns">
+                  <%= link_to 'Edit', edit_polymorphic_path([@parent, @review]), class: "button tiny long-button" %>
+                </div>
+                <div id="review_list_controls" class="small-12 medium-6 columns">
+                  <%= link_to 'Delete', [@parent, @review], method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert long-button" %>
+                </div>
+              </div>
+            <% end %>
+            <% end %>
+            
+          </div> <!-- row -->
+                         
+        </div>
+    
+      <div id="row">
+        
+        <div class="medium-4 columns show-for-medium-up">
+          <a class="th" <%= link_to image_tag(@review.attraction.imageurl, :alt => "image "+@review.attraction.id.to_s, 
+            :title => @review.attraction.name), attraction_path(@review.attraction) %></a>
+          <% if @review.attraction.average_rating != nil %>
+            <h4><small>Average rating: <%= @review.attraction.average_rating %></small></h4>
+          <% end %>
+        </div>
+        
+        <div class="small-12 medium-4 columns">
+          <br /><%= render 'layouts/search' %>
+        </div>
+        
+      </div> <!-- row -->
+        
+  </div>
+</div> <!-- row -->
 
-<p>
-  <strong>Comments:</strong>
-  <%= @review.comments %>
-</p>
+<% if params[:attraction_id] %>
+  <%= link_to '< Back', attraction_reviews_path %>
+<% end %>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @review.rating %>
-</p>
-
-<a href="<%= edit_polymorphic_path([@parent, @review]) %>" class="button [small]">edit</a><br />
+<% if params[:user_id] %>
+  <%= link_to '< Back', user_reviews_path %>
+<% end %>

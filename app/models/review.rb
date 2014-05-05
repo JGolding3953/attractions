@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
-  has_one :user
-  has_one :attraction
+  belongs_to :user
+  belongs_to :attraction
   
  # validates :user_id, presence: true
   validates :rating, presence: true

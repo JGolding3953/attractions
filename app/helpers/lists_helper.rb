@@ -12,8 +12,9 @@ module ListsHelper
     popular_list.order('average_rating ASC LIMIT 4')
   end
   
-  def set_ca_limit(ca_limit_list)
-    ca_limit_list.order('average_rating ASC LIMIT 1')
+  def set_ca_limit(cat_id, att_id)
+    @category_attractions_limit = Attraction.where(category_id: cat_id)
+    .where.not(id: att_id).order('average_rating ASC').limit(2)
   end
   
 end

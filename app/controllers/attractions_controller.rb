@@ -11,10 +11,8 @@ class AttractionsController < ApplicationController
     @attraction_reviews = @attraction.reviews.all
     @attraction.set_average_rating
     
-    @category = Category.find(@attraction.category.id)
-    @category_attractions = @category.attractions.all
-    @category_attractions_limit = set_ca_limit(@category_attractions)
-	end
+    set_ca_limit(@attraction.category.id, @attraction.id)
+  end
 
 	def destroy
     @attraction = Attraction.find(params[:id])

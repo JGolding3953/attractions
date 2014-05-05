@@ -115,7 +115,7 @@ $cursor-text-value: text;
 // TYPOGRAPHY
 //
 
-// $include-html-type-classes: $include-html-classes;
+$include-html-type-classes: $include-html-classes;
 
 // We use these to control header font styles
 $header-font-family: $body-font-family;
@@ -158,20 +158,20 @@ $paragraph-aside-font-style: italic;
 $paragraph-text-rendering: optimizeLegibility;
 
 // We use these to style <code> tags
-// $code-color: scale-color($alert-color, $lightness: -27%);
-// $code-font-family: Consolas, 'Liberation Mono', Courier, monospace;
-// $code-font-weight: bold;
+$code-color: scale-color($alert-color, $lightness: -27%);
+$code-font-family: Consolas, 'Liberation Mono', Courier, monospace;
+$code-font-weight: bold;
 
 // We use these to style anchors
-// $anchor-text-decoration: none;
-// $anchor-font-color: $primary-color;
-// $anchor-font-color-hover: scale-color($primary-color, $lightness: -14%);
+$anchor-text-decoration: none;
+$anchor-font-color: $primary-color;
+$anchor-font-color-hover: scale-color($primary-color, $lightness: -14%);
 
 // We use these to style the <hr> element
-// $hr-border-width: 1px;
-// $hr-border-style: solid;
-// $hr-border-color: #ddd;
-// $hr-margin: rem-calc(20);
+$hr-border-width: 1px;
+$hr-border-style: solid;
+$hr-border-color: #ddd;
+$hr-margin: rem-calc(20);
 
 // We use these to style lists
 $list-style-position: outside;
@@ -1121,18 +1121,18 @@ $table-margin-bottom: rem-calc(20);
 // THUMBNAILS
 //
 
-// $include-html-media-classes: $include-html-classes;
+$include-html-media-classes: $include-html-classes;
 
 // We use these to control border styles
-// $thumb-border-style: solid;
-// $thumb-border-width: 4px;
-// $thumb-border-color: #fff;
-// $thumb-box-shadow: 0 0 0 1px rgba(#000,.2);
-// $thumb-box-shadow-hover: 0 0 6px 1px rgba($primary-color,0.5);
+$thumb-border-style: solid;
+$thumb-border-width: 4px;
+$thumb-border-color: #fff;
+$thumb-box-shadow: 0 0 0 1px rgba(#000,.2);
+$thumb-box-shadow-hover: 0 0 6px 1px rgba($primary-color,0.5);
 
 // Radius and transition speed for thumbs
-// $thumb-radius: $global-radius;
-// $thumb-transition-speed: 200ms;
+$thumb-radius: $global-radius;
+$thumb-transition-speed: 200ms;
 
 //
 // TOOLTIPS

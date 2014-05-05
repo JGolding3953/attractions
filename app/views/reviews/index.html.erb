@@ -1,31 +1,88 @@
-<h3>Reviews</h3>
+<div class="row">
+  <div class="small-12">
+    
+      <div class="small-12 medium-8 columns">
+        
+        <% if @parent.has_attribute?("name") %>
+          <% if @parent.reviews.count == 1 %>
+            <h3><%= @parent.reviews.count.to_s+" Review for " %><%= link_to @parent.name, @parent %></h3>
+          <% else %>
+            <h3><%= @parent.reviews.count.to_s+" Reviews for " %><%= link_to @parent.name, @parent %></h3>
+          <% end %>
+              
+        <% elsif @parent.has_attribute?("email") %>
+          <% if @parent.reviews.count == 1 %>
+            <h3><%= @parent.reviews.count.to_s+" Review by " %><%= link_to @parent.email, @parent %></h3>
+          <% else %>
+            <h3><%= @parent.reviews.count.to_s+" Reviews by " %><%= link_to @parent.email, @parent %></h3>
+          <% end %>
+        <% end %><br/><br/>
 
-<table>
-  <thead>
-    <tr>
-      <th>Attraction</th>
-      <th>User</th>
-      <th>Comments</th>
-      <th>Rating</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+        <ol id="review_list">
+          <% @reviews.each do |review| %>
+          <li>
+            <h4><small><strong>Rating: <%= review.rating %>/5
+              <% if review.title != nil %>
+                <%= review.title %>,
+              <% end %>
+              </strong><%= review.created_at.strftime("%d %b %Y") %></small></h4>
+            <h4><small>By <%= link_to review.user.email, user_path(review.user_id) %>
+            <% if user_signed_in? %>
+              <% if review.user.id == current_user.id %>
+                (You)
+              <% end %>
+            <% end %>
+            <% if @parent.has_attribute?("name") %>
+              | <%= link_to 'See all '+review.user.email+"'s"+' reviews', user_reviews_path(review.user.id) %>
+            <% end %>
+            </small></h4><br />
+            <% if review.comments.length > 50 %>
+              <p><%= review.comments[0..50]+"..." %></p>
+            <% else %>
+              <p><%= review.comments %></p>           
+            <% end %>
 
-  <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td><%= review.attraction_id %></td>
-        <td><%= review.user_id %></td>
-        <td><%= review.comments %></td>
-        <td><%= review.rating %></td>
-        <td><%= link_to 'Show', [@parent, review] %></td>
-        <td><%= link_to 'Edit', edit_polymorphic_path([@parent, review]) %></td>
-        <td><%= link_to 'Destroy', [@parent, review], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+            <div class="row">
+              <% if user_signed_in? %>
+              <% if (review.user.id == current_user.id) || (can? :manage, Review) %>
+                <div class="small-12 medium-4 columns">
+                  <div id="review_list_controls" class="small-12 medium-6 columns">
+                    <%= link_to 'Edit', edit_polymorphic_path([@parent, review]), class: "button tiny long-button" %>
+                  </div>
+                  <div id="review_list_controls" class="small-12 medium-6 columns">
+                    <%= link_to 'Delete', [@parent, review], method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert long-button" %>
+                  </div>
+                </div>
+              <% end %>
+              <% end %>
+              
+              <div id="more_link_container" class="small-12 medium-8 columns">
+                <h4><small id="read_link"><%= link_to "read", [@parent, review] %></small></h4>
+              </div>
+              
+            </div> <!-- row -->
+                         
+          </li><br /><br />
+          <% end %>
+        </ol>
+        </div>
+    
+      <div id="row">
+        
+        <% if @parent.has_attribute?("imageurl") %>
+          <div class="medium-4 columns show-for-medium-up">
+            <a class="th" <%= link_to image_tag(@parent.imageurl, :alt => "image "+@parent.id.to_s, :title => @parent.name), @parent %></a>
+            <% if @parent.average_rating != nil %>
+              <h4><small>Average rating: <%= @parent.average_rating %></small></h4>
+            <% end %>
+          </div>
+          
+          <div class="small-12 medium-4 columns">
+            <br /><%= render 'attractions/other_attractions' %>
+          </div>
+        <% end %>
+        
+      </div> <!-- row -->
+        
+  </div>
+</div> <!-- row -->

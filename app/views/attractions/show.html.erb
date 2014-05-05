@@ -1,46 +1,40 @@
+<p><%= link_to 'All Attractions', attractions_path %>
+| <%= link_to 'All '+@attraction.category.name, category_path(@attraction.category_id) %>
+ <% if can? :manage, Attraction %>
+ | <%= link_to 'Edit', edit_attraction_path(@attraction) %>
+ <% end %></p>
+
 <div class="row">
-  <div class="small-12 columns">
-    
-      <p><%= link_to 'All Attractions', attractions_path %>
-	    | <%= link_to 'All '+@attraction.category.name, category_path(@attraction.category_id) %>
-	     <% if can? :manage, Attraction %>
-		   | <%= link_to 'Edit', edit_attraction_path(@attraction) %>
-		   <% end %></p>
-
-    <div class="row">
-      <div class="small-12 large-3 columns show-for-large-up">
-        <%= render 'layouts/search' %>
-      </div>
-      
-      <div class="small-12 medium-9 large-6 columns">
-	      <div id="grouplist">
-          <h3><%= @attraction.name %></h3>
-          <div id= "image">
-            <%= image_tag(@attraction.imageurl, :alt => "Image", :style => "max-width:100%;height:auto;") %>
-          </div>
-          <div id="desc_text">
-            <% if @attraction.reviews.any? %>
-              <h3><small><%= link_to @attraction.reviews.count, attraction_reviews_path(@attraction, @reviews) %> Reviews | 
-              <%= link_to 'Write a review', new_attraction_review_path(@attraction.id) %></small></h3>
-              <h3><small>Rating: <%= @attraction.average_rating %></small></h3>
-            <% else %>
-              <br /><%= link_to 'Be the first to review', new_attraction_review_path(@attraction.id) %><br /><br />
-            <% end %>
-            <h4><%= @attraction.summary %></h4>
-            <p><%= @attraction.description %></p>
-            <div id="detailWeb">
-              <h4><small>For more details visit:  <a href= <%= @attraction.website %>><%= @attraction.website %></a></small></h4><br />
-            </div>
-          </div>
-         </div>
-	     </div>
-      
-      <div id="otherbox" class="small-12 medium-3 large-3 columns">
-        <h3><small>Other <%= @attraction.category.name %></small></h3>
-        <%= render 'categories/category_a_limit' %>
-      </div>
-
-     </div> <!-- row -->
-    
+  
+  <div class="small-12 large-3 columns show-for-large-up">
+    <%= render 'layouts/search' %>
   </div>
-</div>
+
+  <div class="small-12 medium-9 large-6 columns">
+    <div id="grouplist">
+      <h3><%= @attraction.name %></h3>
+      <div id= "image">
+        <%= image_tag(@attraction.imageurl, :alt => "Image", :style => "max-width:100%;height:auto;") %>
+      </div>
+      <div id="desc_text">
+        <% if @attraction.reviews.any? %>
+          <h3><small><%= link_to @attraction.reviews.count.to_s+" Reviews", attraction_reviews_path(@attraction, @reviews) %> | 
+          <%= link_to 'Write a review', new_attraction_review_path(@attraction.id) %></small></h3>
+          <h3><small>Average rating: <%= @attraction.average_rating %></small></h3>
+        <% else %>
+          <br /><%= link_to 'Be the first to review', new_attraction_review_path(@attraction.id) %><br /><br />
+        <% end %>
+        <h4><%= @attraction.summary %></h4>
+        <p><%= @attraction.description %></p>
+        <div id="detailWeb">
+          <h4><small>For more details visit:  <a href= <%= @attraction.website %>><%= @attraction.website %></a></small></h4><br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="small-12 medium-3 large-3 columns">
+    <%= render 'other_attractions' %>
+  </div>
+
+</div> <!-- row -->

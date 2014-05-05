@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 	has_many :attractions, :dependent => :destroy
-	Category.all :joins => :attractions
+#	Category.all :joins => :attractions
 
 	before_save :assign_default_category_id
 

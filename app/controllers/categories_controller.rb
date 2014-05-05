@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
 	load_and_authorize_resource
+  include ListsHelper
   
   def index
 		@categories = Category.all
@@ -8,6 +9,9 @@ class CategoriesController < ApplicationController
 	def show
 		@category = Category.find(params[:id])
 		@category_attractions = @category.attractions.all
+    
+    attractions = Attraction.all    
+    @popular_list = set_popular(attractions)
 	end
 
 	def new
