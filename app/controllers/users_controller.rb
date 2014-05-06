@@ -42,11 +42,15 @@ class UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
 
-    if @user.update_attributes(user_params)
-      sign_in(@user, :bypass => true) if @user == current_user
-      redirect_to @user, :flash => { :success => 'User was successfully updated.' }
-    else
-      render :action => 'edit'
+    respond_to do |format|
+      if @user.update(user_params)
+        sign_in(@user, :bypass => true) if @user == current_user
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 

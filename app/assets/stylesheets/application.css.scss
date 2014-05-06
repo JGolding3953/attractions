@@ -17,6 +17,7 @@
  */
 
 @import "foundation/components/buttons";
+@import "foundation/components/breadcrumbs";
 
 html {
 	margin:0; /* resets */
@@ -49,6 +50,32 @@ div {
 	display: block;
 }
 
+#top_bar {
+  text-align: center;
+  h1 {
+    text-align: left;
+  }
+  .dropdown li {
+    border-bottom: 1px solid;
+    border-color: #777;
+    text-align: left;
+    #c_menu {
+      float: left;
+    }
+  }
+}
+
+.breadcrumb_nav {
+  @include crumb-container;
+  border: none;
+  background: none;
+  margin-bottom: 0.8rem;
+  line-height: 1;
+  li {
+    @include crumbs;
+  }
+}
+
 #flashSession {
   width: 100%;
   margin-top: 0.5%;
@@ -58,7 +85,7 @@ div {
   float: left;
   margin-top: 0.5%;
   margin-bottom: 0.5%;
-  margin-left: 1.5%;
+  margin-left: 5%;
 }
   
 #sessionInfo {
@@ -72,11 +99,6 @@ div {
 
 h1, h2, h3, h4, h5, h6, p {
   color: #777777;
-}
-
-
-#featured {
-  clear:both;
 }
 
 #whatson, #popular, #otherbox {
@@ -180,5 +202,9 @@ footer, .push {
 }
 
 #or {
+  text-align: center;
+}
+
+#title {
   text-align: center;
 }

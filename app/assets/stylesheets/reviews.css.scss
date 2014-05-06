@@ -8,14 +8,31 @@
   li {
     border-bottom: 1px solid;
     border-color: #c2c2c2;
-    h4 {
+    h3 {
       line-height: 0.7;
     }
   }
 }
 
+#review_list_th {
+  padding-left: 0%;
+  padding-right: 0%;
+  margin-bottom: 8%;
+}
+
+#review_list_text {
+  padding-right: 0%;
+}
+
+#show_review_container {
+  border-bottom: 1px solid;
+  border-color: #c2c2c2;
+  margin-bottom: 5%;
+}
+
 #review_list_controls {
   padding-left: 0%;
+  padding-right: 0%;
 }
 
 #more_link_container {

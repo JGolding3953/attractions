@@ -1,7 +1,24 @@
 <% provide(:title, 'Leeds Attractions | Site Admin') %>
+
+<div class="row">
+  <ul class="breadcrumb_nav">
+    <li><%= link_to 'Home', root_path %></li>
+    <li class="current">Admin</li>
+  </ul>
+</div>
+
 <h2>Admin</h2><br />
-<%= render 'attractions/attractions' %>
-<div id="users_categories_list">
+
+<div class="row">
+  <div class="small-12 columns">
+    <div class="row">
+      <div class="small-12 large-8 columns">
+        <%= render 'attractions/attractions' %>
+      </div>
+      <div class="small-12 large-4 columns">
+        <%= render 'categories/categories' %>
+      </div>
+    </div>
     <%= render 'users/users' %>
-    <%= render 'categories/categories' %>
+  </div>
 </div>

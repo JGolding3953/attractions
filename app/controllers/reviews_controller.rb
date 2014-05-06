@@ -112,8 +112,10 @@ class ReviewsController < ApplicationController
     if params[:attraction_id]
       @parent = Attraction.find(params[:attraction_id])
       set_ca_limit(@parent.category.id, @parent.id)
+      @attraction = @parent
     elsif params[:user_id]
       @parent = User.find(params[:user_id])
+      @user = @parent
     end
   end
   

@@ -1,23 +1,23 @@
 <div class="row">
   <div class="small-12">
     
-    <div class="small-12 medium-8 columns">
+    <div id="show_review_container" class="small-12 medium-8 columns">
         
       <h3>Review for <%= link_to @review.attraction.name, @review.attraction %></h3>       
-        <h4><small>By <%= link_to @review.user.email, user_path(@review.user_id) %>
+        <h3><small>By <%= link_to @review.user.email, user_path(@review.user_id) %>
           <% if user_signed_in? %>
             <% if @review.user.id == current_user.id %>
               (You)
             <% end %>
           <% end %>
-          | <%= link_to 'See all '+@review.user.email+"'s"+' reviews', user_reviews_path(@review.user.id) %>
-          </small></h4><br />
+          | <%= link_to 'Other reviews by this user', user_reviews_path(@review.user.id) %>
+          </small></h3><br />
 
-          <h4><small><strong>Rating: <%= @review.rating %>/5
+          <h3><small><strong>Rating: <%= @review.rating %>/5
             <% if @review.title != nil %>
               <%= @review.title %>,
             <% end %>
-            </strong><%= @review.created_at.strftime("%d %b %Y") %></small></h4>
+            </strong><%= @review.created_at.strftime("%d %b %Y") %></small></h3>
 
           <p><%= @review.comments %></p>           
 
@@ -25,10 +25,10 @@
             <% if user_signed_in? %>
             <% if (@review.user.id == current_user.id) || (can? :manage, Review) %>
               <div class="small-12 medium-4 columns">
-                <div id="review_list_controls" class="small-12 medium-6 columns">
+                <div id="review_list_controls" class="small-12 medium-5 columns">
                   <%= link_to 'Edit', edit_polymorphic_path([@parent, @review]), class: "button tiny long-button" %>
                 </div>
-                <div id="review_list_controls" class="small-12 medium-6 columns">
+                <div id="review_list_controls" class="small-12 medium-5 columns">
                   <%= link_to 'Delete', [@parent, @review], method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert long-button" %>
                 </div>
               </div>

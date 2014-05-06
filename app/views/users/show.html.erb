@@ -1,28 +1,48 @@
-<br /><p><% if @user == current_user %>
-	<%= link_to 'Change Password', edit_user_path(@user) %>
-<% elsif can? :manage, User %>
-	<%= link_to 'All Users', users_path %>
-	| <%= link_to 'Edit User', edit_user_path(@user) %> |
-	<%= link_to 'Delete User', user_path(@user), :method => 'delete', confirm: 'Are you sure?' %>
-<% end %></p><br />
-
-<h2>User</h2>
-
-<p><strong>Email:</strong> <%= @user.email %></p>
-<% if can? :manage, User %>
-	<p><strong>Type:</strong>
-    <% if @user.has_role? :admin %>
- 		Admin
-	<% else %>
-		User</p>
-	<% end %>
-<% end %>
-
-<div class="span2">
-  <% if @user.reviews.any? %>
-    <h3><%= link_to @user.reviews.count, user_reviews_path(@user, @reviews) %> Reviews</h3>
-    <ol class="reviews">
+<div class="row">
+  <div class="small-12 columns">
+    
+    <div class="row">
+      <ul class="breadcrumb_nav">
+        <li><%= link_to 'Home', root_path %></li>
+        <% if can? :manage, User %>
+          <li><%= link_to 'Users', users_path %></li>
+        <% else %>
+          <li class="unavailable">Users</li>
+        <% end %>
+        <li class="current">Profile</li>
+      </ul>
+    </div>
+        
+    <div class="row">
+      <div id="profile_box" class="small-12 medium-8 columns">
+        <div>
+    
+          <h2 id="profile_header">User profile</h2>
+          <h3><small><%= @user.email %>
+          <% if can? :manage, User %>
+            <% if @user.has_role? :admin %>
+              (admin)
+            <% else %>
+              (user)
+            <% end %>
+            <%= link_to "(edit)", edit_user_path(@user) %></small></h3>
+          <% end %>
+          
+          <% if @user == current_user %>
+            <%= link_to 'Change password', edit_user_path(@user) %>
+          <% end %>
+          
+          <% if @user.reviews.any? %>
+            <h3 id="review_tally"><%= link_to @user.reviews.count, user_reviews_path(@user, @reviews) %> Reviews</h3>
+          <% end %>
+        </div>
+      </div>
+    
+      <div class="small-12 medium-4 columns">
+        <%= render 'layouts/search' %>
+      </div><br />
       
-    </ol>
-  <% end %>
-</div>
+    </div> <!-- row -->
+    
+  </div>
+</div> <!-- row -->

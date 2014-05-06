@@ -14,7 +14,7 @@
       <% end %>
       
       <div class="row">
-        <br /><div class="small-12 medium-4 small-centered columns">
+        <div class="small-12 medium-4 small-centered columns">
           <h2>Sign up</h2>
         </div>
       </div><br />
@@ -22,21 +22,21 @@
       <div class="row">
         <div class="small-12 medium-4 small-centered columns">
           <%= f.label :email %><br />
-          <input placeholder="enter your email" <%= f.email_field :email, autocomplete: "off" %>
+          <%= f.email_field :email, placeholder: "enter an email address", autocomplete: "off" %>
         </div>
-      </div><br />
+      </div>
       
       <div class="row">
         <div class="small-12 medium-4 small-centered columns">
           <%= f.label :password %><br />
-          <input placeholder="enter a password" <%= f.password_field :password, autocomplete: "off" %>
+          <%= f.password_field :password, placeholder: "enter a password", autocomplete: "off" %>
         </div>
-      </div><br />
+      </div>
       
      <div class="row">
         <div class="small-12 medium-4 small-centered columns">
           <%= f.label :password_confirmation %><br />
-          <input placeholder="re-enter your password" <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          <%= f.password_field :password_confirmation, placeholder: "confirm your password", autocomplete: "off" %>
         </div>
       </div>
       
@@ -52,7 +52,7 @@
          </div>
        <% end %>
         
-      <br /><br /><div class="row">
+      <br /><div class="row">
         <div class="small-12 medium-4 small-centered columns">
           <div class="row">
             <div class="small-12 medium-6 columns">
