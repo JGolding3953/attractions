@@ -28,13 +28,13 @@
             <ul class="right">
               <% if user_signed_in? %>
                 <li class="has-form">
-                  <a href="<%= user_path(current_user.id) %>" class="button">My Account</a>
+                  <%= link_to 'My Account', user_path(current_user.id), class: "button" %>
                 </li>
               <% else %>
               <li><%= link_to 'Sign in', new_user_session_path %></li>
               <li class="divider"></li>
               <li class="has-form">
-                <a href="<%= new_user_path %>" class="button">Sign Up</a>
+                <%= link_to 'Sign up', new_user_path, class: "button" %>
               </li>
               <% end %>
               <li class="divider"></li>
@@ -62,9 +62,9 @@
             <!-- Left Nav Section -->
             <ul class="left">
               <% if can? :manage, :all %>
-              <li class="divider"></li>
-              <li><%= link_to "Site Admin", admin_path %></li>
-              <li class="divider"></li>
+                <li class="divider"></li>
+                <li><%= link_to "Site Admin", admin_path %></li>
+                <li class="divider"></li>
               <% end %>
             </ul>
           </section>
