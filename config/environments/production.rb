@@ -67,8 +67,8 @@ Rails.application.configure do
   # es    In production, :host should be set to the actual host of your application.
   #es devise
   #Added per active admin install instructions
-  #	Rails.application.routes.default_url_options[:host] = 'galamoyo.herokuapp.com'
-  config.action_mailer.default_url_options = { :host => 'eyrie-rails-91236.euw1-2.nitrousbox.com' }
+  Rails.application.routes.default_url_options[:host] = 'young-castle-9029.herokuapp.com'
+  config.action_mailer.default_url_options = { :host => 'young-castle-9029.herokuapp.com' }
   #These settings are for the sending out email for active admin and consequently the   devise mailer
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
