@@ -40,7 +40,7 @@ class ReviewsController < ApplicationController
        end
     elsif @user_has_reviewed
       respond_to do |format|
-        format.html { redirect_to edit_polymorphic_path([current_user, @user_review]) }
+        format.html { redirect_to edit_polymorphic_path([@parent, @user_review]) }
           format.json { head :no_content }
        end
     else    

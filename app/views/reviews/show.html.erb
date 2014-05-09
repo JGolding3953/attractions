@@ -66,19 +66,19 @@
         <div class="show-for-medium-up">
           <a class="th" <%= link_to image_tag(@review.attraction.imageurl, :alt => "image "+@review.attraction.id.to_s, 
             :title => @review.attraction.name), attraction_path(@review.attraction) %></a>
-          <% if @review.attraction.average_rating != nil %>
-          <h4><small>Average rating: <strong class="<%= 'h3'+@review.attraction.average_rating.round(0).to_s %>"><%= @review.attraction.average_rating %></strong> | 
-          <% end %>
-          <% if @user_has_reviewed %>
-            <% if @user %>
-              <%= link_to 'Edit your review', edit_user_review_path(current_user, @user_review) %>
-            <% else %>
-              <%= link_to 'Edit your review', edit_attraction_review_path(@review.attraction, @user_review) %>
+          <h4>
+            <% if @review.attraction.average_rating != nil %>
+              <small class="list_rating"><%= link_to 'Average rating: ', attraction_reviews_path(@review.attraction.id) %></small>
+              <small id="c_a_rating"><strong class="<%= 'h3'+@review.attraction.average_rating.round(0).to_s %>"><%= link_to @review.attraction.average_rating, attraction_reviews_path(@review.attraction.id) %></strong> | </small> 
             <% end %>
-          <% else %>
-            <%= link_to 'Write a review', new_attraction_review_path(@review.attraction) %>
-          <% end %>
-          </small></h4>
+            <small>
+            <% if @user_has_reviewed %>
+             <%= link_to 'Edit your review', edit_polymorphic_path([@parent, @user_review]) %>
+            <% else %>
+             <%= link_to 'Write a review', new_attraction_review_path(@review.attraction) %>
+            <% end %>
+            </small>
+          </h4>
         </div>
         <div>
           <br /><%= render 'layouts/search' %>

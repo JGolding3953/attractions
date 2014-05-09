@@ -121,16 +121,19 @@
         <% if @attraction.has_attribute?("imageurl") %>
           <div class="medium-4 columns show-for-medium-up">
             <a class="th" <%= link_to image_tag(@attraction.imageurl, :alt => "image "+@attraction.id.to_s, :title => @attraction.name), @attraction %></a>
-            <h4><small>
-            <% if @attraction.average_rating != nil %>
-              Average rating: <strong class="<%= 'h3'+@attraction.average_rating.round(0).to_s %>"><%= @attraction.average_rating %></strong> | 
-            <% end %>
-            <% if @user_has_reviewed %>
-             <%= link_to 'Edit your review', edit_polymorphic_path([current_user, @user_review]) %>
-            <% else %>
-             <%= link_to 'Write a review', new_attraction_review_path(@attraction) %>
-            <% end %>
-            </small></h4>
+            <h4>
+              <% if @attraction.average_rating != nil %>
+                <small class="list_rating">Average rating: </small>
+                <small><strong class="<%= 'h3'+@attraction.average_rating.round(0).to_s %>"><%= @attraction.average_rating %></strong> | </small> 
+              <% end %>
+              <small>
+              <% if @user_has_reviewed %>
+               <%= link_to 'Edit your review', edit_polymorphic_path([@parent, @user_review]) %>
+              <% else %>
+               <%= link_to 'Write a review', new_attraction_review_path(@attraction) %>
+              <% end %>
+              </small>
+            </h4>
           </div>
         <% end %>
 

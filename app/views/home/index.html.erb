@@ -15,7 +15,7 @@
       </div>
     </li>
     <% end %>
-  </ul>
+  </ul><br />
   <div id="listings" class="row"> <!-- listings -->
     <div id="whatson" class="small-12 medium-6 columns"> <!-- random -->
       <h3>What's on</h3>
@@ -26,7 +26,18 @@
             <a class="th"<%= link_to image_tag(r.imageurl, :alt => "image "+r.id.to_s, :title => r.name), r %></a>
           </div>
           <div id="text">
-            <h3><small><%= link_to r.name, r %></small></h3>
+            <h3><small>
+            <% if r.name.length > 18 %>
+              <%= link_to r.name[0..18]+'...', r %> 
+            <% else %>
+              <%= link_to r.name, r %> 
+            <% end %>
+            </small></h3>
+            <% if r.average_rating != nil %>
+              <h3 id="c_a_rating"><small><strong class="<%= 'h3'+r.average_rating.round(0).to_s %>"><%= link_to r.average_rating, attraction_reviews_path(r.id) %></strong></small></h3> 
+            <% else %>
+              <h3><small class="list_rating"><%= link_to 'Not yet rated', new_attraction_review_path(r.id) %></small></h3>
+            <% end %>
           </div>
         </li>
       <% end %>
@@ -41,13 +52,25 @@
             <a class="th"<%= link_to image_tag(p.imageurl, :alt => "image "+p.id.to_s, :title => p.name), p %></a>
           </div>
           <div id="text">
-            <h3><small><%= link_to p.name, p %></small></h3>
+            <h3><small>
+            <% if p.name.length > 18 %>
+              <%= link_to p.name[0..18]+'...', p %> 
+            <% else %>
+              <%= link_to p.name, p %> 
+            <% end %>
+            </small></h3>
+            <% if p.average_rating != nil %>
+              <h3 id="c_a_rating"><small><strong class="<%= 'h3'+p.average_rating.round(0).to_s %>"><%= link_to p.average_rating, attraction_reviews_path(p.id) %></strong></small></h3> 
+            <% else %>
+              <h3><small class="list_rating"><%= link_to 'Not yet rated', new_attraction_review_path(p.id) %></small></h3>
+            <% end %>
+
           </div>
         </li>
       <% end %>
       </ul>
     </div> <!-- popular -->  
-  </div><br /> <!-- listings -->
+  </div><br /><br /> <!-- listings -->
 </div> <!-- main -->
           
 <div class="small-12 medium-4 columns show-for-medium-up"> <!-- sidebar -->
