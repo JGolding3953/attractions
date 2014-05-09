@@ -1,26 +1,46 @@
 class ReviewsController < ApplicationController  
   include ListsHelper
+  include ApplicationHelper
 
   before_filter :find_parent
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_action :set_reviews, only: [:index]
+  before_action :set_reviews, only: [:index, :destroy]
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   # GET /reviews
   # GET /reviews.json
   def index
+     if @attraction
+      if user_signed_in?
+        user_review_check(current_user.id, @attraction.id)
+      end
+    end
   end
 
   # GET /reviews/1
   # GET /reviews/1.json
   def show
+    if user_signed_in?
+      user_review_check(current_user.id, @review.attraction.id)
+    end
   end
 
   # GET /reviews/new
   def new
-    if params[:user_id]
+    if @attraction
+      if user_signed_in?
+        user_review_check(current_user.id, @attraction)
+      end
+    end
+    
+    if @user
        respond_to do |format|
           format.html { redirect_to user_reviews_path, notice: 'You are not authorised to do this.' }
+          format.json { head :no_content }
+       end
+    elsif @user_has_reviewed
+      respond_to do |format|
+        format.html { redirect_to edit_polymorphic_path([current_user, @user_review]) }
           format.json { head :no_content }
        end
     else    
@@ -94,8 +114,13 @@ class ReviewsController < ApplicationController
     @review.destroy
     respond_to do |format|
       if @reviews != nil
-        format.html { redirect_to @reviews, notice: 'Review deleted' }
-        format.json { head :no_content }
+        if params[:attraction_id]
+          format.html { redirect_to attraction_reviews_path, notice: 'Review deleted' }
+          format.json { head :no_content }
+        elsif params[:user_id]
+          format.html { redirect_to user_reviews_path, notice: 'Review deleted' }
+          format.json { head :no_content }
+        end
       else
         format.html { redirect_to @parent, notice: 'Review deleted' }
         format.json { head :no_content }

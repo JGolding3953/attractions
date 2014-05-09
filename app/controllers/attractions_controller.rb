@@ -1,7 +1,8 @@
 class AttractionsController < ApplicationController
   load_and_authorize_resource
   include ListsHelper
-  
+  include ApplicationHelper
+    
 	def index
 		@attractions = Attraction.all
 	end
@@ -9,9 +10,12 @@ class AttractionsController < ApplicationController
 	def show
 		@attraction = Attraction.find(params[:id])
     @attraction_reviews = @attraction.reviews.all
-    @attraction.set_average_rating
     
     set_ca_limit(@attraction.category.id, @attraction.id)
+    
+    if user_signed_in?
+      user_review_check(current_user.id, @attraction.id)
+    end
   end
 
 	def destroy
@@ -50,7 +54,7 @@ class AttractionsController < ApplicationController
   end
 
   private
-  
+
   def attraction_params
     params.require(:attraction)
     if can? :manage, Attraction

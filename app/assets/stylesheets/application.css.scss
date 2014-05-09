@@ -71,6 +71,11 @@ div {
   background: none;
   margin-bottom: 0.8rem;
   line-height: 1;
+  border-top: 1px solid #c2c2c2;
+  border-bottom: 1px solid #c2c2c2;
+  margin-bottom: 0.1rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.7rem;
   li {
     @include crumbs;
   }
@@ -85,7 +90,7 @@ div {
   float: left;
   margin-top: 0.5%;
   margin-bottom: 0.5%;
-  margin-left: 5%;
+  margin-left: 2%;
 }
   
 #sessionInfo {
@@ -207,4 +212,56 @@ footer, .push {
 
 #title {
   text-align: center;
+}
+
+#back_link {
+  margin-bottom: 2%;
+  border-bottom: 1px solid;
+  border-color: #c2c2c2;
+  padding-top: 0.5rem;
+  padding-left: 0.7rem;
+  padding-bottom: 0.6rem;
+  a {
+    font-size: 0.8rem;
+  }
+}
+
+.h31 {
+  color: #00ff99;
+}
+
+.h32 {
+  color: #00ff4e;
+}
+
+.h33 {
+  color: #66ff00;
+}
+
+.h34 {
+  color: #ccff00;
+}
+
+.h35 {
+  color: #ffcc00;
+}
+
+.h36 {
+  color: #FFa000;
+}
+
+.h37 {
+  color: #FF6e00;
+}
+
+.h38 {
+  color: #FF3c00;
+}
+
+.h39 {
+  color: #FF1e00;
+}
+
+.h310 {
+  color: #FF0000;
 }

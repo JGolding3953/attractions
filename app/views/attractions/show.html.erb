@@ -7,7 +7,7 @@
         <li><%= link_to @attraction.category.name, category_path(@attraction.category_id) %></li>
         <li class="current"><%= @attraction.name %></li>
       </ul>
-    </div>
+    </div><br />
  
     <div class="row">
 
@@ -27,8 +27,13 @@
           <div id="desc_text">
             <% if @attraction.reviews.any? %>
               <h3 id="review_info"><small><%= link_to @attraction.reviews.count.to_s+" Reviews", attraction_reviews_path(@attraction, @reviews) %> | 
-              <%= link_to 'Write a review', new_attraction_review_path(@attraction.id) %></small></h3>
-              <h3 id="review_info"><small>Average rating: <%= @attraction.average_rating %></small></h3>
+                <% if @user_has_reviewed %>
+                 <%= link_to 'Edit your review', edit_attraction_review_path(@attraction, @user_review) %>
+                <% else %>
+                 <%= link_to 'Write a review', new_attraction_review_path(@attraction) %>
+                <% end %>
+              </small></h3>
+            <h3 id="review_info"><small>Average rating: <strong class="<%= 'h3'+@attraction.average_rating.round(0).to_s %>"><%= @attraction.average_rating %></strong></small></h3>
             <% else %>
               <br /><%= link_to 'Be the first to review', new_attraction_review_path(@attraction.id) %><br /><br />
             <% end %>

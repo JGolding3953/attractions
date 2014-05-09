@@ -1,67 +1,91 @@
 <div class="row">
-  <div class="small-12">
+  <div class="small-12 columns">
     
-    <div id="show_review_container" class="small-12 medium-8 columns">
-        
-      <h3>Review for <%= link_to @review.attraction.name, @review.attraction %></h3>       
-        <h3><small>By <%= link_to @review.user.email, user_path(@review.user_id) %>
-          <% if user_signed_in? %>
-            <% if @review.user.id == current_user.id %>
-              (You)
-            <% end %>
-          <% end %>
-          | <%= link_to 'Other reviews by this user', user_reviews_path(@review.user.id) %>
-          </small></h3><br />
-
-          <h3><small><strong>Rating: <%= @review.rating %>/5
-            <% if @review.title != nil %>
-              <%= @review.title %>,
-            <% end %>
-            </strong><%= @review.created_at.strftime("%d %b %Y") %></small></h3>
-
-          <p><%= @review.comments %></p>           
-
-          <div class="row">
+    <div class="row">
+      <ul class="breadcrumb_nav">
+        <% if @user %>
+          <li><%= link_to 'User Profile', user_path(@user) %></li>
+          <li><%= link_to 'Reviews', user_reviews_path(@user) %></li>
+        <% elsif @attraction %>
+          <li><%= link_to @attraction.name, attraction_path(@attraction) %></li>
+          <li><%= link_to 'Reviews', attraction_reviews_path(@attraction) %></li>
+        <% end %>
+        <li class="current">Review</li>
+      </ul>
+    </div>
+    
+    <div id="back_link" class="row">
+      <% if @attraction %>
+        <%= link_to '< Back', attraction_reviews_path %>
+      <% end %>
+      <% if @user %>
+        <%= link_to '< Back', user_reviews_path %>
+      <% end %>
+    </div>
+    
+    <div class="row">
+      
+      <div class="small-12 medium-8 columns">
+        <div id="show_review_container">
+          <h3>Review for <%= link_to @review.attraction.name, @review.attraction %></h3>       
+          <h3><small>By <%= link_to @review.user.email, user_path(@review.user_id) %>
             <% if user_signed_in? %>
-            <% if (@review.user.id == current_user.id) || (can? :manage, Review) %>
-              <div class="small-12 medium-4 columns">
-                <div id="review_list_controls" class="small-12 medium-5 columns">
-                  <%= link_to 'Edit', edit_polymorphic_path([@parent, @review]), class: "button tiny long-button" %>
-                </div>
-                <div id="review_list_controls" class="small-12 medium-5 columns">
-                  <%= link_to 'Delete', [@parent, @review], method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert long-button" %>
-                </div>
-              </div>
+              <% if @review.user.id == current_user.id %>
+                (You)
+              <% end %>
             <% end %>
-            <% end %>
-            
-          </div> <!-- row -->
-                         
-        </div>
+          | <%= link_to 'Other reviews by this user', user_reviews_path(@review.user.id) %>
+          </small></h3>
     
-      <div id="row">
-        
-        <div class="medium-4 columns show-for-medium-up">
+          <h3><small><strong>Rating: </strong><strong class="<%= 'h3'+@review.rating.to_s %>"><%= @review.rating %>/10</strong>
+            <% if @review.title != nil %>
+              <strong><%= @review.title %>, </strong>
+            <% end %>
+          <%= @review.created_at.strftime("%d %b %Y") %></small></h3>
+  
+          <p><%= @review.comments %></p>           
+    
+          <% if user_signed_in? %>
+          <% if (@review.user.id == current_user.id) || (can? :manage, Review) %>
+          <div class="row">
+            <div class="small-12 medium-4 columns">
+              <div id="review_list_controls" class="small-12 medium-5 columns">
+                <%= link_to 'Edit', edit_polymorphic_path([@parent, @review]), class: "button tiny long-button" %>
+              </div>
+              <div id="review_list_controls" class="small-12 medium-5 columns">
+                <%= link_to 'Delete', [@parent, @review], method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny alert long-button" %>
+              </div>
+            </div>
+          </div> <!-- row -->                        
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+          
+      <div class="small-12 medium-4 columns">
+        <div class="show-for-medium-up">
           <a class="th" <%= link_to image_tag(@review.attraction.imageurl, :alt => "image "+@review.attraction.id.to_s, 
             :title => @review.attraction.name), attraction_path(@review.attraction) %></a>
           <% if @review.attraction.average_rating != nil %>
-            <h4><small>Average rating: <%= @review.attraction.average_rating %></small></h4>
+          <h4><small>Average rating: <strong class="<%= 'h3'+@review.attraction.average_rating.round(0).to_s %>"><%= @review.attraction.average_rating %></strong> | 
           <% end %>
+          <% if @user_has_reviewed %>
+            <% if @user %>
+              <%= link_to 'Edit your review', edit_user_review_path(current_user, @user_review) %>
+            <% else %>
+              <%= link_to 'Edit your review', edit_attraction_review_path(@review.attraction, @user_review) %>
+            <% end %>
+          <% else %>
+            <%= link_to 'Write a review', new_attraction_review_path(@review.attraction) %>
+          <% end %>
+          </small></h4>
         </div>
-        
-        <div class="small-12 medium-4 columns">
+        <div>
           <br /><%= render 'layouts/search' %>
         </div>
-        
-      </div> <!-- row -->
-        
+      </div>
+      
+    </div> <!-- row -->
+                
   </div>
 </div> <!-- row -->
-
-<% if params[:attraction_id] %>
-  <%= link_to '< Back', attraction_reviews_path %>
-<% end %>
-
-<% if params[:user_id] %>
-  <%= link_to '< Back', user_reviews_path %>
-<% end %>

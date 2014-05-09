@@ -4,7 +4,7 @@
     <%= form_for [@parent, @review] do |f| %>
       <% if @review.errors.any? %>
         <div id="error_explanation">
-          <h3><small><%= pluralize(@review.errors.count, "error") %> prohibited this user from being saved:</small></h3>
+          <h3><small><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</small></h3>
           <ul>
           <% @review.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
@@ -19,13 +19,6 @@
           <%= f.text_field :title %>
         </div>
       </div><br />
-    
-      <div class="row">
-        <div class="small-12 medium-4 small-centered columns">
-          <%= f.label :rating %><br />
-          <%= f.text_field :rating, placeholder: "give a rating" %>
-        </div>
-      </div><br />
       
       <div class="row">
         <div class="small-12 medium-4 small-centered columns">
@@ -34,7 +27,32 @@
         </div>
       </div><br />
     
-       <br /><br /><div class="row">
+      <div class="row"> 
+        <div class="small-12 medium-4 small-centered columns">
+          <%= f.label :rating %>
+          <%= f.hidden_field :rating, id: 'rating_field' %>
+          <div class="range-slider" data-slider data-options="start: 1; end: 10; initial: <%= @review.rating %>; display_selector:#output;">        
+            <span class="range-slider-handle"></span>
+            <span class="range-slider-active-segment"></span>
+            <input type="hidden" id="slider_val">
+            
+            <script>            
+              $('[data-slider]').on('change', function(){
+                var value = $('#slider_val').val();
+                $("#rating_field").val(value);
+                $("#output").removeClass().addClass('h3'+value);
+                $("#output2").removeClass().addClass('h3'+value);
+              });
+            </script>
+            
+          </div>
+          <div id="rating_form_output">
+            <h3 id="output2" class=""><strong id="output" class=""></strong><strong>/10</strong></h3>
+          </div>
+        </div>
+      </div><br />
+    
+      <div class="row">
         <div class="small-12 medium-4 small-centered columns">
           <div class="row">
             <div class="small-12 medium-6 columns">
@@ -50,4 +68,4 @@
     <% end %>
         
   </div>
-</div>
+</div><br />

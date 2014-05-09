@@ -9,4 +9,14 @@ module ApplicationHelper
     end
   end
         
+  def user_review_check(user_id, attr_id)
+    @user_has_reviewed = false
+    Review.where(attraction_id: attr_id).find_each do |review|
+      if review.user_id == user_id
+        @user_has_reviewed = true
+        @user_review = review
+      end
+    end
+  end
+        
 end

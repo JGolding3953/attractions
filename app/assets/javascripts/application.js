@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require foundation/foundation.slider.js
 //= require turbolinks
 //= require jquery.turbolinks
 //= require_tree .

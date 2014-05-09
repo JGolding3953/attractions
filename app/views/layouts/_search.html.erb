@@ -5,9 +5,9 @@
       <div class="small-12 columns">
         <label>By category
           <select id="select">
-            <Option value="">Select
+            <option value="">Select</option>
             <% Category.all.each do |c| %>
-              <option value="<%= c.id %>">- <%= c.name %></option>
+              <option value="<%= c.id %>"><%= c.name %></option>
             <% end %>
             <script>
               //get select element and listen for a change event on it.

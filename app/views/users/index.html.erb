@@ -1,1 +1,20 @@
+<% provide(:title, 'Leeds Attractions - User List') %>
+
+<div class="row">
+  <div class="small-12 columns">
+    
+    <div class="row">
+      <ul class="breadcrumb_nav">
+        <li><%= link_to 'Home', root_path %></li>        
+        <li><%= link_to 'Admin', admin_path %></li>        
+        <li class="current">Users</li>
+      </ul>
+    </div>
+    
+    <div id="back_link" class="row">
+      <%= link_to '< Back', admin_path %>
+    </div>
+  </div>
+</div>
+    
 <%= render 'users' %>

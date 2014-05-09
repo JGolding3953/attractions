@@ -1,2 +1,2 @@
-module AttractionsHelper
+module AttractionsHelper    
 end

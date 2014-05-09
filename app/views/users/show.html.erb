@@ -9,33 +9,58 @@
         <% else %>
           <li class="unavailable">Users</li>
         <% end %>
-        <li class="current">Profile</li>
+        <li class="current">
+        <% if @user == current_user %>
+          My 
+        <% else %>
+          User
+        <% end %>
+          Profile</li>
       </ul>
-    </div>
+    </div><br />
         
     <div class="row">
+      
       <div id="profile_box" class="small-12 medium-8 columns">
+        <h2 id="profile_header">
+        <% if @user == current_user %>
+          My 
+        <% else %>
+          User
+        <% end %>
+          profile</h2>
+        
         <div>
-    
-          <h2 id="profile_header">User profile</h2>
-          <h3><small><%= @user.email %>
-          <% if can? :manage, User %>
+          <% if @user == current_user %>
+            <div id="change_password_link">
+              <h3><small><%= link_to 'Change password', edit_user_path(@user) %></small></h3>
+            </div>
+          <% end %>
+          <div>
+            <h3 id="user_info"><small><strong><%= @user.email %></strong>
             <% if @user.has_role? :admin %>
               (admin)
-            <% else %>
-              (user)
             <% end %>
-            <%= link_to "(edit)", edit_user_path(@user) %></small></h3>
-          <% end %>
-          
-          <% if @user == current_user %>
-            <%= link_to 'Change password', edit_user_path(@user) %>
-          <% end %>
-          
-          <% if @user.reviews.any? %>
-            <h3 id="review_tally"><%= link_to @user.reviews.count, user_reviews_path(@user, @reviews) %> Reviews</h3>
-          <% end %>
+            <% if can? :manage, User %>
+              <% if @user.has_role? :user %>
+                (user)
+              <% end %>
+              <%= link_to "(edit)", edit_user_path(@user) %></small></h3>
+            <% end %>
+          </div>
         </div>
+        
+        <h3 id="user_info"><small>Member since: <strong><%= @user.created_at.strftime("%d %b %Y") %></strong></small></h3><br />
+            
+        <% if @user.reviews.any? %>
+          <h3><%= link_to @user.reviews.count, user_reviews_path(@user, @reviews) %>
+          <% if @user.reviews.count == 1 %>
+            Review
+          <% else %>
+            Reviews
+          <% end %>
+          </h3>
+        <% end %>      
       </div>
     
       <div class="small-12 medium-4 columns">
