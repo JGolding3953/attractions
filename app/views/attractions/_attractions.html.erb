@@ -20,7 +20,7 @@
           <td><%= link_to a.category.name, category_path(a.category_id) %></td>
           <% if can? :manage, Attraction %>
             <td>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_attraction_path(a) %> | <%= link_to 'Delete', attraction_path(a), :method => 'delete', :class => 'action', data: { confirm: 'Are you sure?' } %></p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Edit', edit_attraction_path(a) %> | <%= link_to 'Delete', attraction_path(a), :method =>                       'delete', :class => 'action', data: { confirm: 'Are you sure?' } %></p>
             </td>
           <% end %>
         </tr>

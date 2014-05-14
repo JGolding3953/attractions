@@ -17,7 +17,7 @@
           <div id="other_text">
             <h3><small><%= link_to c_a.name, c_a %></small></h3>
             <% if c_a.average_rating != nil %>
-              <h3><small class="list_rating"><%= link_to 'Average rating: ', attraction_reviews_path(c_a.id) %></small><small><strong class="<%= 'h3'+c_a.average_rating.round(0).to_s %>"><%= link_to c_a.average_rating, attraction_reviews_path(c_a.id) %></strong></small></h3> 
+              <h3><small class="list_rating"><%= link_to 'Average rating: ', attraction_reviews_path(c_a.id) %></small><small><strong class="<%=                       'h3'+c_a.average_rating.round(0).to_s %>"><%= link_to c_a.average_rating, attraction_reviews_path(c_a.id) %></strong></small></h3> 
             <% else %>
               <h3><small class="list_rating"><%= link_to 'Not yet rated', new_attraction_review_path(c_a.id) %></small></h3>
             <% end %>

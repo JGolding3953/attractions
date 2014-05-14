@@ -15,12 +15,7 @@
     </div>
     
     <div id="back_link" class="row">
-      <% if @attraction %>
-        <%= link_to '< Back', attraction_reviews_path %>
-      <% end %>
-      <% if @user %>
-        <%= link_to '< Back', user_reviews_path %>
-      <% end %>
+      <%= link_to '< Back', :back %>
     </div>
     
     <div class="row">
