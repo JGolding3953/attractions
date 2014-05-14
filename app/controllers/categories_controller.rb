@@ -10,8 +10,7 @@ class CategoriesController < ApplicationController
 		@category = Category.find(params[:id])
 		@category_attractions = @category.attractions.all
     
-    attractions = Attraction.all    
-    @popular_list = set_popular(attractions)
+    set_popular_category(params[:id])
 	end
 
 	def new

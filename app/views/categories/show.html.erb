@@ -6,7 +6,11 @@
         <li><%= link_to 'Home', root_path %></li>
         <li class="current"><%= @category.name %></li>
       </ul>
-    </div><br />
+    </div>
+    
+    <div id="back_link" class="row">
+      <%= link_to '< Back', :back %>
+    </div>
     
     <div class="row">
       <div class="small-12 large-3 columns show-for-large-up">
@@ -30,7 +34,7 @@
                     <div id="c_a_text" class="small-12 medium-6 columns">
                       <h5><%= link_to a.name, a %></h5>
                       <% if a.average_rating != nil %>
-                      <h3 id="c_a_rating"><small class="list_rating"><%= link_to 'Average rating: ', attraction_reviews_path(a.id) %><strong class="<%= 'h3'+a.average_rating.round(0).to_s %>"><%= link_to a.average_rating, attraction_reviews_path(a.id) %></strong></small></h3> 
+                      <h3 id="c_a_rating"><small class="list_rating"><%= link_to 'Average rating: ', attraction_reviews_path(a.id) %><strong class="<%=                       'h3'+a.average_rating.round(0).to_s %>"><%= link_to a.average_rating, attraction_reviews_path(a.id) %></strong></small></h3> 
                       <% else %>
                       <h3><small class="list_rating"><%= link_to 'Not yet rated', new_attraction_review_path(a.id) %></small></h3>
                       <% end %>
@@ -44,10 +48,40 @@
         </div>
       </div>
       
-      <div id="" class="small-12 large-3 columns">
-      </div><br />
+      <div class="small-12 medium-3 columns">
+        <div id="otherbox">
+          <h3>Popular</h3>
+          <div class="row">
+            <div class="small-12 columns">
+              <ul>
+                <% @popular_list.each do |p| %>
+                <li>
+                  <div id="other_image">
+                    <a class="th"<%= link_to image_tag(p.imageurl, :alt => "image "+p.id.to_s, :title => p.name), p %></a>
+                  </div>
+                  <div id="other_text">
+                    <h3><small>
+                      <% if p.name.length > 18 %>
+                      <%= link_to p.name[0..18]+'...', p %> 
+                      <% else %>
+                      <%= link_to p.name, p %> 
+                      <% end %>
+                      </small></h3>
+                    <% if p.average_rating != nil %>
+                      <h3><small class="list_rating"><%= link_to 'Average rating: ', attraction_reviews_path(p.id) %></small><small><strong class="<%=                       'h3'+p.average_rating.round(0).to_s %>"><%= link_to p.average_rating, attraction_reviews_path(p.id) %></strong></small></h3> 
+                    <% else %>
+                      <h3><small class="list_rating"><%= link_to 'Not yet rated', new_attraction_review_path(p.id) %></small></h3>
+                    <% end %>
+                  </div>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
       
-    </div> <!-- row -->
+    </div><br /> <!-- row -->
     
   </div>
 </div> <!-- row -->
