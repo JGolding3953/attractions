@@ -22,13 +22,11 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
 
     if @user.save
-      if can? :manage, User
-        redirect_to users_path, :flash => { :success => 'User was successfully created.' }
-      else
+      
         sign_in(@user, :bypass => true)
         redirect_to @user, :flash => { :success => 'You have successfully created an account.' }
 
-      end
+      
     else
       render :action => 'new'
     end
