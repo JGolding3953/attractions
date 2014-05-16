@@ -67,7 +67,7 @@ Attractions::Application.configure do
   # es    In production, :host should be set to the actual host of your application.
   #es devise
   #Added per active admin install instructions
-  Attractions::Application.routes.default_url_options[:host] = 'young-castle-9029.herokuapp.com'
+  Rails.application.routes.default_url_options[:host] = 'young-castle-9029.herokuapp.com'
   config.action_mailer.default_url_options = { :host => 'young-castle-9029.herokuapp.com' }
   #These settings are for the sending out email for active admin and consequently the   devise mailer
   config.action_mailer.delivery_method = :smtp
